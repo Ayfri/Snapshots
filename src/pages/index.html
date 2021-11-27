@@ -119,6 +119,7 @@
 					const button = document.getElementById('generate');
 					button.onclick = () => {
 						generateSnapshotPage(new Snapshot('test', Date.now(), 'description test', 'url test'));
+						button.onclick = null;
 					};
 				</script>
 			</div>

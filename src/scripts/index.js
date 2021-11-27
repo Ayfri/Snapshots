@@ -10,7 +10,7 @@ export function generateSnapshotPage(snapshot) {
 	snapshotPage.appendChild(generateSnapshotTitle(snapshot));
 	snapshotPage.appendChild(generateSnapshotBody(snapshot));
 
-	document.getElementsByClassName("content")[0].appendChild(snapshotPage);
+	document.getElementsByClassName("content")[0].append(snapshotPage);
 }
 
 /**
@@ -38,7 +38,7 @@ function generateSnapshotBody(snapshot) {
 	snapshotBodyDiv.appendChild(snapshotBody);
 	const snapshotDate = document.createElement('p');
 	snapshotDate.textContent = snapshot.date;
-	snapshotDate.classList.add('date');
+	snapshotDate.className = 'snapshot-date';
 	snapshotBodyDiv.appendChild(snapshotDate);
 	return snapshotBodyDiv;
 }
