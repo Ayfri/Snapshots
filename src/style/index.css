@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    padding: 5px;
+    padding: 4px 4px 4px 50px;
 }
 
 .navbar a {
@@ -26,7 +26,7 @@
     border: none;
     outline: none;
     color: white;
-    padding: 12px 14px;
+    padding: 10px 12px;
     background-color: inherit;
     font-family: inherit;
     margin: 0;
@@ -62,7 +62,12 @@
     display: block;
 }
 
+.logo {
+    position: absolute;
+    left: 20px;
+}
+
 .logo img {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
 }
