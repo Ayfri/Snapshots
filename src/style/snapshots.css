@@ -1,4 +1,4 @@
-.snapshot-page {
+.snapshot-page .snapshot-card {
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -28,4 +28,58 @@
     font-style: italic;
     margin-bottom: 1em;
     color: #888;
+}
+
+.version-page {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #ccc;
+    margin: 0 auto;
+    padding: 1em;
+    width: 90vw;
+    min-height: 50vh;
+}
+
+.version-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.version-image-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-bottom: 1em;
+}
+
+.version-image {
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #bbb;
+    min-width: 40vw;
+    max-height: 40vh;
+}
+
+.version-important-description {
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    float: left;
+    width: auto;
+    height: 25%;
+}
+
+.version-snapshots {
+    background: #ddd;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    float: left;
+    width: auto;
+    height: 75%;
 }
