@@ -1,4 +1,7 @@
 export * from './snapshot.js';
+import {fixDropDowns} from './CSSFixes.js';
+
+document.addEventListener('DOMContentLoaded', fixDropDowns);
 
 /**
  * @param {Snapshot} snapshot
