@@ -2,7 +2,7 @@ export * from './snapshot.js';
 import {fixDropDowns} from './CSSFixes.js';
 
 document.addEventListener('DOMContentLoaded', fixDropDowns);
-dayjs.extend(window.dayjs_plugin_localizedFormat)
+dayjs.extend(window.dayjs_plugin_localizedFormat);
 
 /**
  * @param {Snapshot} snapshot
@@ -13,7 +13,7 @@ export function generateSnapshotPage(snapshot) {
 	snapshotPage.appendChild(generateSnapshotTitle(snapshot));
 	snapshotPage.appendChild(generateSnapshotBody(snapshot));
 
-	document.getElementsByClassName("content")[0].append(snapshotPage);
+	document.getElementsByClassName('content')[0].append(snapshotPage);
 }
 
 /**
