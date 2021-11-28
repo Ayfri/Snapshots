@@ -1,8 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 @import url("snapshots.css");
 
 :root {
     --nav-color: #212F53;
     --button-background: #dddddd;
+    --dropdown-border-radius: 8px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
 }
 
 .navbar {
@@ -36,14 +43,14 @@
     color: black;
     padding: 10px 50px;
     background-color: var(--button-background);
-    border-radius: 8px;
+    border-radius: var(--dropdown-border-radius);
     font-family: inherit;
     margin: 0;
 }
 
 .dropdown:hover .dropdown-button {
     background-color: white;
-    border-radius: 8px 8px 0 0;
+    border-radius: var(--dropdown-border-radius) var(--dropdown-border-radius) 0 0;
 }
 
 .navbar a:hover .dropdown:hover .dropdown-button {
@@ -55,8 +62,9 @@
     position: absolute;
     background-color: #f9f9f9;
     min-width: 100px;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 var(--dropdown-border-radius) 16px 0 rgba(0, 0, 0, 0.2);
     z-index: 1;
+    border-radius: 0 0 var(--dropdown-border-radius) var(--dropdown-border-radius);
 }
 
 .dropdown-content a {
