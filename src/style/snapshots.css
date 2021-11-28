@@ -60,13 +60,16 @@
     border: 1px solid #dddddd;
     border-radius: 5px;
     box-shadow: 0 0 10px #bbb;
-    min-width: 40vw;
-    max-height: 40vh;
+    width: 800px;
+    max-width: 80vw;
+    height: 400px;
+    max-height: 60vh;
 }
 
 .version-important-description {
     border: 1px solid #dddddd;
     border-radius: 5px;
+    padding: 5px;
     float: left;
     width: auto;
     height: 25%;

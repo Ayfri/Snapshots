@@ -3,7 +3,7 @@ import {generateSnapshotCard, Snapshot} from './snapshot.js';
 /**
  * @param {Version} version
  */
-export function generateVersionPage(version) {
+export async function generateVersionPage(version) {
 	const content = document.getElementsByClassName('content')[0];
 	const versionPage = document.createElement('div');
 	versionPage.className = 'version-page';
@@ -24,7 +24,7 @@ export function generateVersionPage(version) {
 	versionBody.appendChild(versionImageDiv);
 
 	const versionImage = document.createElement('img');
-	versionImage.src = version.imageUrl;
+	versionImage.src = await fetch(`../resources/images/${version.imageUrl}`).then(r => r.url);
 	versionImage.className = 'version-image';
 	versionImage.alt = `${version.name} image`;
 	versionImageDiv.appendChild(versionImage);

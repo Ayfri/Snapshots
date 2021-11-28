@@ -121,7 +121,7 @@
 					button.onclick = async () => {
 						const json = await fetch('../resources/snapshots.json').then(res => res.json());
 						const version = Version.getFromJSON(json['1.0']);
-						generateVersionPage(version);
+						await generateVersionPage(version);
 						button.onclick = null;
 					};
 				</script>
