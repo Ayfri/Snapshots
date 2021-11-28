@@ -113,11 +113,13 @@
 					generate
 				</button>
 				<script type="module">
-					import {generateSnapshotPage, Snapshot} from '../scripts/index.js';
+					import {generateSnapshotPage, Snapshot, Version} from '../scripts/index.js';
 					
 					const button = document.getElementById('generate');
-					button.onclick = () => {
-						generateSnapshotPage(new Snapshot('test', Date.now(), 'description test', 'url test'));
+					button.onclick = async () => {
+						const json = await fetch("../resources/snapshots.json").then(res => res.json());
+						const version = Version.getFromJSON(json["1.0"]);
+						generateSnapshotPage(version.snapshots[0]);
 						button.onclick = null;
 					};
 				</script>

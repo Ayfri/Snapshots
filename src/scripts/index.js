@@ -40,7 +40,7 @@ function generateSnapshotBody(snapshot) {
 	snapshotBody.textContent = snapshot.description;
 	snapshotBodyDiv.appendChild(snapshotBody);
 	const snapshotDate = document.createElement('p');
-	snapshotDate.textContent = snapshot.date;
+	snapshotDate.textContent = snapshot.date.toString();
 	snapshotDate.className = 'snapshot-date';
 	snapshotBodyDiv.appendChild(snapshotDate);
 
