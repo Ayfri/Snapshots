@@ -82,7 +82,10 @@
     flex-direction: column;
     border: 1px solid #dddddd;
     border-radius: 5px;
-    float: left;
-    width: auto;
+    float: right;
+    position: relative;
+    bottom: 20vh;
+    right: 20vw;
+    min-width: 20vw;
     height: 75%;
 }
