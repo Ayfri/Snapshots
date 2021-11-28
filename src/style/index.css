@@ -1,8 +1,12 @@
 @import url("snapshots.css");
 
+:root {
+    --nav-color: #212F53;
+}
+
 .navbar {
     overflow: hidden;
-    background-color: #212F53;
+    background-color: var(--nav-color);
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -35,7 +39,7 @@
 }
 
 .navbar a:hover .dropdown:hover .dropButton {
-    background-color: #212F53;
+    background-color: var(--nav-color);
 }
 
 .dropdown-content {

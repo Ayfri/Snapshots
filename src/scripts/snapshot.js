@@ -16,6 +16,12 @@ export class Snapshot {
 	 */
 	url;
 
+	/**
+	 * @param {string} name
+	 * @param {Date} date
+	 * @param {string} description
+	 * @param {string} url
+	 */
 	constructor(name, date, description, url) {
 		this.name = name;
 		this.date = date;
@@ -34,9 +40,18 @@ export class Version extends Snapshot {
 	 */
 	importantDescription;
 
-	constructor(name, date, description, url, image, importantDescription) {
+	/**
+	 *
+	 * @param {string} name
+	 * @param {Date} date
+	 * @param {string} description
+	 * @param {string} url
+	 * @param {string} imageUrl
+	 * @param {string} importantDescription
+	 */
+	constructor(name, date, description, url, imageUrl, importantDescription) {
 		super(name, date, description, url);
-		this.imageUrl = image;
+		this.imageUrl = imageUrl;
 		this.importantDescription = importantDescription;
 	}
 }

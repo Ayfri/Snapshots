@@ -1,6 +1,5 @@
 export * from './snapshot.js';
 
-
 /**
  * @param {Snapshot} snapshot
  */
@@ -23,6 +22,7 @@ function generateSnapshotTitle(snapshot) {
 	const snapshotTitle = document.createElement('h1');
 	snapshotTitle.textContent = snapshot.name;
 	snapshotTitleDiv.appendChild(snapshotTitle);
+
 	return snapshotTitleDiv;
 }
 
@@ -40,5 +40,6 @@ function generateSnapshotBody(snapshot) {
 	snapshotDate.textContent = snapshot.date;
 	snapshotDate.className = 'snapshot-date';
 	snapshotBodyDiv.appendChild(snapshotDate);
+
 	return snapshotBodyDiv;
 }
