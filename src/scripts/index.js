@@ -2,6 +2,7 @@ export * from './snapshot.js';
 import {fixDropDowns} from './CSSFixes.js';
 
 document.addEventListener('DOMContentLoaded', fixDropDowns);
+dayjs.extend(window.dayjs_plugin_localizedFormat)
 
 /**
  * @param {Snapshot} snapshot
@@ -40,7 +41,7 @@ function generateSnapshotBody(snapshot) {
 	snapshotBody.textContent = snapshot.description;
 	snapshotBodyDiv.appendChild(snapshotBody);
 	const snapshotDate = document.createElement('p');
-	snapshotDate.textContent = snapshot.date.toString();
+	snapshotDate.textContent = dayjs(snapshot.date).format('L');
 	snapshotDate.className = 'snapshot-date';
 	snapshotBodyDiv.appendChild(snapshotDate);
 
