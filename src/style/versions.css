@@ -1,0 +1,71 @@
+.version-page {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #ccc;
+    margin: 0.5em auto 2em auto;
+    padding: 1em;
+    width: 90vw;
+    min-height: 50vh;
+}
+
+.version-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.version-image-and-description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.version-image-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-bottom: 1em;
+}
+
+.version-image {
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #bbb;
+    display: block;
+    aspect-ratio: 16/9;
+    width: auto;
+    height: auto;
+    min-width: 40vw;
+    max-width: 50vw;
+    max-height: 60vh;
+}
+
+.version-description {
+    padding: 2.5vw;
+    height: 100%;
+}
+
+.version-important-description {
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 5px;
+    float: left;
+    width: auto;
+    height: 25%;
+}
+
+.version-snapshots {
+    background: #ddd;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    position: relative;
+    min-width: 40vw;
+    height: 75%;
+}

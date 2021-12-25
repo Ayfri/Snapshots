@@ -120,6 +120,9 @@
 					const button = document.getElementById('generate');
 					button.onclick = async () => {
 						const input = 'https://raw.githubusercontent.com/Ayfri/minecraft-wiki-scrapper/master/out/versions.json';
+						/**
+						 * @type {Version[]}
+						 */
 						const json = await fetch(input).then(res => res.json());
 						const version = Version.getFromJSON(json[1]);
 						await generateVersionPage(version);

@@ -90,9 +90,7 @@ export class Version extends Snapshot {
 	 */
 	static getFromJSON(json) {
 		let importantDescription = json.description.split(/\. [A-Z]/).slice(0, 2).join('\n');
-		if (importantDescription.length > 100) {
-			importantDescription = json.description.split(/\. [A-Z]/)[0];
-		}
+		if (importantDescription.length > 100) importantDescription = json.description.split(/\. [A-Z]/)[0];
 		const snapshots = json.snapshots.map(s => Snapshot.getFromJSON(s));
 		return new Version(json.name, new Date(json.date), json.description, json.url, json.imageUrl, importantDescription, snapshots);
 	}
