@@ -19,9 +19,13 @@ export async function generateVersionPage(version) {
 	versionBody.className = 'version-body';
 	versionPage.appendChild(versionBody);
 
+	const versionImageAndDescription = document.createElement('div');
+	versionImageAndDescription.className = 'version-image-and-description';
+	versionBody.appendChild(versionImageAndDescription);
+
 	const versionImageDiv = document.createElement('div');
 	versionImageDiv.className = 'version-image-div';
-	versionBody.appendChild(versionImageDiv);
+	versionImageAndDescription.appendChild(versionImageDiv);
 
 	const versionImage = document.createElement('img');
 	versionImage.src = await fetch(`../resources/images/${version.imageUrl}`).then(r => r.url);
@@ -29,19 +33,21 @@ export async function generateVersionPage(version) {
 	versionImage.alt = `${version.name} image`;
 	versionImageDiv.appendChild(versionImage);
 
+
 	const versionDescription = document.createElement('p');
 	versionDescription.className = 'version-description';
 	versionDescription.textContent = version.description;
-	versionBody.appendChild(versionDescription);
+	versionImageAndDescription.appendChild(versionDescription);
 
 	const versionImportantDescription = document.createElement('p');
 	versionImportantDescription.className = 'version-important-description';
 	versionImportantDescription.textContent = version.importantDescription;
+
 	versionImageDiv.appendChild(versionImportantDescription);
 
 	const versionSnapshots = document.createElement('div');
 	versionSnapshots.className = 'version-snapshots';
-	versionPage.appendChild(versionSnapshots);
+	versionBody.appendChild(versionSnapshots);
 
 	version.snapshots.forEach(snapshot => generateSnapshotCard(snapshot, versionSnapshots));
 
@@ -83,7 +89,10 @@ export class Version extends Snapshot {
 	 * @returns {Version}
 	 */
 	static getFromJSON(json) {
-		const importantDescription = json.description.split('\n').slice(0, 4).join('\n');
+		let importantDescription = json.description.split(/\. [A-Z]/).slice(0, 2).join('\n');
+		if (importantDescription.length > 100) {
+			importantDescription = json.description.split(/\. [A-Z]/)[0];
+		}
 		const snapshots = json.snapshots.map(s => Snapshot.getFromJSON(s));
 		return new Version(json.name, new Date(json.date), json.description, json.url, json.imageUrl, importantDescription, snapshots);
 	}
