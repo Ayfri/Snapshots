@@ -54,6 +54,10 @@ body {
     border-radius: var(--dropdown-border-radius) var(--dropdown-border-radius) 0 0;
 }
 
+.dropdown-content:hover:last-child {
+    border-radius: 0 0 var(--dropdown-border-radius) var(--dropdown-border-radius);
+}
+
 .navbar a:hover .dropdown:hover .dropdown-button {
     background-color: var(--nav-color);
 }

@@ -35,7 +35,7 @@
     border: 1px solid #ccc;
     border-radius: 20px;
     box-shadow: 0 0 10px #ccc;
-    margin: 0 auto;
+    margin: 0.5em auto 2em auto;
     padding: 1em;
     width: 90vw;
     min-height: 50vh;
@@ -43,9 +43,16 @@
 
 .version-body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+}
+
+.version-image-and-description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .version-image-div {
@@ -60,10 +67,18 @@
     border: 1px solid #dddddd;
     border-radius: 5px;
     box-shadow: 0 0 10px #bbb;
-    width: 800px;
-    max-width: 80vw;
-    height: 400px;
+    display: block;
+    aspect-ratio: 16/9;
+    width: auto;
+    height: auto;
+    min-width: 40vw;
+    max-width: 50vw;
     max-height: 60vh;
+}
+
+.version-description {
+    padding: 1em;
+    height: 100%;
 }
 
 .version-important-description {
@@ -78,14 +93,11 @@
 .version-snapshots {
     background: #ddd;
     padding: 10px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     border: 1px solid #dddddd;
     border-radius: 5px;
-    float: right;
     position: relative;
-    bottom: 20vh;
-    right: 20vw;
-    min-width: 20vw;
+    min-width: 40vw;
     height: 75%;
 }
