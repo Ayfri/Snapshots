@@ -1,3 +1,5 @@
+const snapshotBodyLeaveListener = () => document.querySelector('#snapshot-page').style.display = 'none';
+
 /**
  * @param {Snapshot} snapshot
  * @param {HTMLDivElement} div
@@ -16,32 +18,30 @@ export function generateSnapshotCard(snapshot, div) {
 	snapshotCard.appendChild(snapshotCardDownloadButton);
 
 	div.appendChild(snapshotCard);
-}
 
+	snapshotCard.addEventListener('mouseenter', () => {
+		generateSnapshotPage(snapshot, document.body);
+	});
+
+}
 /**
  * @param {Snapshot} snapshot
+ * @param {HTMLDivElement} div
  */
-export function generateSnapshotPage(snapshot) {
-	const snapshotPage = document.createElement('div');
-	snapshotPage.className = 'snapshot-page';
-	snapshotPage.appendChild(generateSnapshotTitle(snapshot));
+export function generateSnapshotPage(snapshot, div) {
+	let snapshotPage;
+	if (document.querySelector('#snapshot-page')) {
+		snapshotPage = document.querySelector('#snapshot-page');
+		snapshotPage.innerHTML = '';
+	} else {
+		snapshotPage = document.createElement('div');
+		snapshotPage.id = 'snapshot-page';
+		div.appendChild(snapshotPage);
+	}
+
 	snapshotPage.appendChild(generateSnapshotBody(snapshot));
-
-	document.getElementsByClassName('content')[0].append(snapshotPage);
-}
-
-/**
- * @param {Snapshot} snapshot
- * @returns {HTMLDivElement}
- */
-function generateSnapshotTitle(snapshot) {
-	const snapshotTitleDiv = document.createElement('div');
-	snapshotTitleDiv.className = 'snapshot-title';
-	const snapshotTitle = document.createElement('h1');
-	snapshotTitle.textContent = snapshot.name;
-	snapshotTitleDiv.appendChild(snapshotTitle);
-
-	return snapshotTitleDiv;
+	document.querySelector('.snapshot-body')?.addEventListener('mouseleave', snapshotBodyLeaveListener);
+	snapshotPage.style.display = 'block';
 }
 
 /**
@@ -51,15 +51,45 @@ function generateSnapshotTitle(snapshot) {
 function generateSnapshotBody(snapshot) {
 	const snapshotBodyDiv = document.createElement('div');
 	snapshotBodyDiv.className = 'snapshot-body';
+	generateExitButton(snapshot, snapshotBodyDiv);
+	snapshotBodyDiv.appendChild(generateSnapshotTitle(snapshot));
 	const snapshotBody = document.createElement('p');
 	snapshotBody.textContent = snapshot.description;
 	snapshotBodyDiv.appendChild(snapshotBody);
 	const snapshotDate = document.createElement('p');
-	snapshotDate.textContent = dayjs(snapshot.date).format('L');
+	const parsedDate = dayjs(snapshot.releaseTime);
+	snapshotDate.textContent = parsedDate.isValid() ? parsedDate.format('L') : 'Invalid Date or not found.';
 	snapshotDate.className = 'snapshot-date';
 	snapshotBodyDiv.appendChild(snapshotDate);
 
 	return snapshotBodyDiv;
+}
+
+/**
+ * @param {Snapshot} snapshot snapshot
+ * @param {HTMLDivElement} body
+ */
+function generateExitButton(snapshot, body) {
+	const exit = document.createElement('a');
+	exit.className = 'exit-button';
+	exit.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+width="24" height="24"
+viewBox="0 0 24 24"
+style=" fill:#000000;"><path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"></path></svg>`
+	body.appendChild(exit);
+	exit.title = 'Close';
+	exit.addEventListener('click', snapshotBodyLeaveListener);
+}
+
+/**
+ * @param {Snapshot} snapshot
+ * @returns {HTMLHeadingElement}
+ */
+function generateSnapshotTitle(snapshot) {
+	const snapshotTitle = document.createElement('h1');
+	snapshotTitle.textContent = snapshot.name;
+
+	return snapshotTitle;
 }
 
 export class Snapshot {
@@ -68,9 +98,9 @@ export class Snapshot {
 	 */
 	name;
 	/**
-	 * @type {Date}
+	 * @type {number}
 	 */
-	date;
+	releaseTime;
 	/**
 	 * @type {string}
 	 */
@@ -88,18 +118,19 @@ export class Snapshot {
 	 */
 	constructor(name, date, description, url) {
 		this.name = name;
-		this.date = date;
+		this.releaseTime = date;
 		this.description = description;
 		this.url = url;
 	}
 
 	/**
-	 * @param {Object} json
+	 * @param {Snapshot} json
 	 * @returns {Snapshot}
 	 */
 	static getFromJSON(json) {
-		return new Snapshot(json.name, new Date(json.date), json.description, json.url);
+		return new Snapshot(json.name, new Date(json.releaseTime * 1000), json.description, json.url);
 	}
 
-	download() {}
+	download() {
+	}
 }

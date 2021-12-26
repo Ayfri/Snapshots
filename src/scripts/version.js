@@ -85,13 +85,15 @@ export class Version extends Snapshot {
 	}
 
 	/**
-	 * @param {Object} json
+	 * @param {Version} json
 	 * @returns {Version}
 	 */
 	static getFromJSON(json) {
 		let importantDescription = json.description.split(/\. [A-Z]/).slice(0, 2).join('\n');
 		if (importantDescription.length > 100) importantDescription = json.description.split(/\. [A-Z]/)[0];
+		const description = json.description.replace(/\. (?=[A-Z])/, ".\n");
+
 		const snapshots = json.snapshots.map(s => Snapshot.getFromJSON(s));
-		return new Version(json.name, new Date(json.date), json.description, json.url, json.imageUrl, importantDescription, snapshots);
+		return new Version(json.name, new Date(json.releaseTime), description, json.url, json.imageUrl, importantDescription, snapshots);
 	}
 }
