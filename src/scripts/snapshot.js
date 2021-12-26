@@ -1,4 +1,7 @@
-const snapshotBodyLeaveListener = () => document.querySelector('#snapshot-page').style.display = 'none';
+const snapshotBodyLeaveListener = () => {
+	document.querySelectorAll('.snapshot-card-hover').forEach(card => card.classList.remove('snapshot-card-hover'));
+	document.querySelector('#snapshot-page').style.display = 'none';
+};
 
 /**
  * @param {Snapshot} snapshot
@@ -19,11 +22,21 @@ export function generateSnapshotCard(snapshot, div) {
 
 	div.appendChild(snapshotCard);
 
-	snapshotCard.addEventListener('mouseenter', () => {
-		generateSnapshotPage(snapshot, document.body);
-	});
+	snapshotCard.addEventListener('mouseenter', async () => {
+		let removeHover = true;
+		snapshotCard.classList.add('snapshot-card-hover');
+		const timer = setTimeout(() => {
+			removeHover = false;
+			generateSnapshotPage(snapshot, document.body);
+		}, 750);
 
+		snapshotCard.onmouseleave = async () => {
+			clearTimeout(timer);
+			if (removeHover) snapshotCard.classList.remove('snapshot-card-hover');
+		};
+	});
 }
+
 /**
  * @param {Snapshot} snapshot
  * @param {HTMLDivElement} div
@@ -75,7 +88,7 @@ function generateExitButton(snapshot, body) {
 	exit.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
 width="24" height="24"
 viewBox="0 0 24 24"
-style=" fill:#000000;"><path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"></path></svg>`
+style=" fill:#000000;"><path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"></path></svg>`;
 	body.appendChild(exit);
 	exit.title = 'Close';
 	exit.addEventListener('click', snapshotBodyLeaveListener);
