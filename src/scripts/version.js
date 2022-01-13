@@ -1,3 +1,4 @@
+import {fixGridCount} from './CSSFixes.js';
 import {generateSnapshotCard, Snapshot} from './snapshot.js';
 
 /**
@@ -52,6 +53,8 @@ export async function generateVersionPage(version) {
 	version.snapshots.forEach(snapshot => generateSnapshotCard(snapshot, versionSnapshots));
 
 	content.appendChild(versionPage);
+	fixGridCount();
+	window.addEventListener('resize', () => fixGridCount());
 }
 
 export class Version extends Snapshot {

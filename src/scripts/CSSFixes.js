@@ -1,12 +1,20 @@
 export const fixDropDowns = () => {
-	const dropdown = document.getElementsByClassName('dropdown');
+	const dropdown = document.querySelectorAll('.dropdown');
 	[...dropdown].forEach(element => {
-		if (element.getElementsByClassName('dropdown-button')) {
-			const button = element.getElementsByClassName('dropdown-button')[0];
+		if (element.querySelectorAll('.dropdown-button')) {
+			const button = element.querySelector('.dropdown-button');
 			button.addEventListener('mouseover', () => {
-				const list = element.getElementsByClassName('dropdown-content')[0];
+				const list = element.querySelector('.dropdown-content');
 				list.style.width = `${button.offsetWidth}px`;
 			});
 		}
 	});
+};
+
+export const fixGridCount = () => {
+	/**
+	 * @type {HTMLDivElement}
+	 */
+	const grid = document.querySelector('.version-snapshots');
+	grid.style.gridTemplateColumns = `repeat(${Math.floor(grid.offsetWidth / 250)}, minmax(250px, 1fr))`;
 };

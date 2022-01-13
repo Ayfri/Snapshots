@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', onLoad);
 dayjs.extend(window.dayjs_plugin_localizedFormat);
 
 function onLoad() {
-	fixDropDowns()
+	fixDropDowns();
 	/**
 	 * @type {HTMLButtonElement}
 	 */
-	const button = document.querySelector("#generate")
-	button.click()
+	const button = document.querySelector('#generate');
+	button.click();
 	button.onclick = null;
 }

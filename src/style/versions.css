@@ -64,10 +64,12 @@
     border: 1px solid #dddddd;
     border-radius: 10px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
     grid-gap: 1em 0;
     padding: 1em;
     position: relative;
+    width: 90%;
     min-width: 40vw;
     height: 75%;
+    justify-items: center;
 }
