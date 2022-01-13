@@ -1,3 +1,5 @@
+import {MINECRAFT_WIKI_LINK} from "./constants.js"
+
 const snapshotBodyLeaveListener = () => {
 	document.querySelectorAll('.snapshot-card-hover').forEach(card => card.classList.remove('snapshot-card-hover'));
 	document.querySelector('#snapshot-page').style.display = 'none';
@@ -66,9 +68,12 @@ function generateSnapshotBody(snapshot) {
 	snapshotBodyDiv.className = 'snapshot-body';
 	generateExitButton(snapshot, snapshotBodyDiv);
 	snapshotBodyDiv.appendChild(generateSnapshotTitle(snapshot));
+
 	const snapshotBody = document.createElement('p');
-	snapshotBody.textContent = snapshot.description;
+	snapshotBody.innerHTML = snapshot.description;
 	snapshotBodyDiv.appendChild(snapshotBody);
+	snapshotBody.querySelectorAll('a').forEach(a => a.href = MINECRAFT_WIKI_LINK + a.getAttribute('href'));
+
 	const snapshotDate = document.createElement('p');
 	const parsedDate = dayjs(snapshot.releaseTime);
 	snapshotDate.textContent = parsedDate.isValid() ? parsedDate.format('L') : 'Invalid Date or not found.';

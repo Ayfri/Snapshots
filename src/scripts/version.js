@@ -1,3 +1,4 @@
+import {MINECRAFT_WIKI_LINK} from './constants.js';
 import {fixGridCount} from './CSSFixes.js';
 import {generateSnapshotCard, Snapshot} from './snapshot.js';
 
@@ -37,7 +38,10 @@ export async function generateVersionPage(version) {
 
 	const versionDescription = document.createElement('p');
 	versionDescription.className = 'version-description';
-	versionDescription.textContent = version.description;
+	versionDescription.innerHTML = version.description;
+	[...versionDescription.querySelectorAll('a')]
+		.filter(a => a.href.startsWith('/wiki/'))
+        .forEach(a => a.href = MINECRAFT_WIKI_LINK + a.getAttribute('href'));
 	versionImageAndDescription.appendChild(versionDescription);
 
 	const versionImportantDescription = document.createElement('p');
@@ -92,9 +96,12 @@ export class Version extends Snapshot {
 	 * @returns {Version}
 	 */
 	static getFromJSON(json) {
-		let importantDescription = json.description.split(/\. [A-Z]/).slice(0, 2).join('\n');
-		if (importantDescription.length > 100) importantDescription = json.description.split(/\. [A-Z]/)[0];
-		const description = json.description.replace(/\. (?=[A-Z])/, ".\n");
+		const description = json.description;
+
+		let descriptionElement = document.createElement('p');
+		descriptionElement.innerHTML = description;
+		let importantDescription = descriptionElement.innerText.split(/\. [A-Z]/).slice(0, 2).join('\n') + '.';
+		if (importantDescription.length > 100) importantDescription = descriptionElement.innerText.split(/\. [A-Z]/)[0] + '.';
 
 		const snapshots = json.snapshots.map(s => Snapshot.getFromJSON(s));
 		return new Version(json.name, new Date(json.releaseTime), description, json.url, json.imageUrl, importantDescription, snapshots);
