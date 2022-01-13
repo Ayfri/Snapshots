@@ -38,7 +38,7 @@ export async function generateVersionPage(version) {
 
 	const versionDescription = document.createElement('p');
 	versionDescription.className = 'version-description';
-	versionDescription.innerHTML = version.description;
+	versionDescription.innerHTML = version.description.replace(/\. (<sup>.*?<\/sup>)?/g, ".$1<br>");
 	[...versionDescription.querySelectorAll('a')]
 		.filter(a => a.href.startsWith('/wiki/'))
         .forEach(a => a.href = MINECRAFT_WIKI_LINK + a.getAttribute('href'));

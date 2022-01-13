@@ -70,6 +70,7 @@ function generateSnapshotBody(snapshot) {
 	snapshotBodyDiv.appendChild(generateSnapshotTitle(snapshot));
 
 	const snapshotBody = document.createElement('p');
+	snapshotBody.className = 'snapshot-description';
 	snapshotBody.innerHTML = snapshot.description;
 	snapshotBodyDiv.appendChild(snapshotBody);
 	snapshotBody.querySelectorAll('a').forEach(a => a.href = MINECRAFT_WIKI_LINK + a.getAttribute('href'));
