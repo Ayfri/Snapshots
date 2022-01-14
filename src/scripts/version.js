@@ -1,5 +1,6 @@
 import {MINECRAFT_WIKI_LINK} from './constants.js';
 import {fixGridCount} from './CSSFixes.js';
+import images from '../resources/images.json' assert {type: 'json'}
 import {generateSnapshotCard, Snapshot} from './snapshot.js';
 
 /**
@@ -103,7 +104,9 @@ export class Version extends Snapshot {
 		let importantDescription = descriptionElement.innerText.split(/\. [A-Z]/).slice(0, 2).join('\n') + '.';
 		if (importantDescription.length > 100) importantDescription = descriptionElement.innerText.split(/\. [A-Z]/)[0] + '.';
 
+		const imageUrl = Object.entries(images).find(([key, value], _) => json.name.toLowerCase().includes(key[0]))[1];
+
 		const snapshots = json.snapshots.map(s => Snapshot.getFromJSON(s));
-		return new Version(json.name, new Date(json.releaseTime), description, json.url, json.imageUrl, importantDescription, snapshots);
+		return new Version(json.name, new Date(json.releaseTime), description, json.url, imageUrl, importantDescription, snapshots);
 	}
 }
