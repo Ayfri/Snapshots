@@ -106,7 +106,8 @@ export class Version extends Snapshot {
 
 		const imageUrl = Object.entries(images).find(([key, value], _) => json.name.toLowerCase().includes(key[0]))[1];
 
-		const snapshots = json.snapshots.map(s => Snapshot.getFromJSON(s));
+		const snapshots = json.snapshots.map(Snapshot.getFromJSON);
 		return new Version(json.name, new Date(json.releaseTime), description, json.url, imageUrl, importantDescription, snapshots);
 	}
 }
+

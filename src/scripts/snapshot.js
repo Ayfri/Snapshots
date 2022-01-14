@@ -80,6 +80,23 @@ function generateSnapshotBody(snapshot) {
 	snapshotDate.textContent = parsedDate.isValid() ? parsedDate.format('L') : 'Invalid Date or not found.';
 	snapshotDate.className = 'snapshot-date';
 	snapshotBodyDiv.appendChild(snapshotDate);
+	
+	const downloadClientButton = document.createElement('button');
+	downloadClientButton.classList.add('snapshot-download', 'download-client');
+	downloadClientButton.type = 'submit';
+	downloadClientButton.setAttribute('onclick', `window.open('${snapshot.downloadClient ?? '#'}')`);
+	downloadClientButton.innerText = snapshot.downloadClient ? 'Download Client' : 'Unavailable';
+	if (!snapshot.downloadClient) downloadClientButton.disabled = true;
+	snapshotBodyDiv.appendChild(downloadClientButton);
+
+	const downloadJSONButton = document.createElement('button');
+	downloadJSONButton.classList.add('snapshot-download', 'download-json');
+	downloadJSONButton.type = 'submit';
+	downloadJSONButton.setAttribute('onclick', `window.open('${snapshot.downloadJSON ?? '#'}')`);
+	downloadJSONButton.innerText = snapshot.downloadJSON ? 'Download JSON' : 'Unavailable';
+	if (!snapshot.downloadJSON) downloadJSONButton.disabled = true;
+	snapshotBodyDiv.appendChild(downloadJSONButton);
+
 
 	return snapshotBodyDiv;
 }
@@ -127,19 +144,25 @@ export class Snapshot {
 	/**
 	 * @type {string}
 	 */
-	url;
+	downloadClient;
+	/**
+	 * @type {string}
+	 */
+	downloadJSON;
 
 	/**
 	 * @param {string} name
 	 * @param {Date} date
 	 * @param {string} description
-	 * @param {string} url
+	 * @param {string} downloadClient
+	 * @param {string} downloadJSON
 	 */
-	constructor(name, date, description, url) {
+	constructor(name, date, description, downloadClient, downloadJSON) {
 		this.name = name;
 		this.releaseTime = date;
 		this.description = description;
-		this.url = url;
+		this.downloadClient = downloadClient;
+		this.downloadJSON = downloadJSON;
 	}
 
 	/**
@@ -147,9 +170,7 @@ export class Snapshot {
 	 * @returns {Snapshot}
 	 */
 	static getFromJSON(json) {
-		return new Snapshot(json.name, new Date(json.releaseTime * 1000), json.description, json.url);
-	}
-
-	download() {
+		return new Snapshot(json.name, new Date(json.releaseTime * 1000), json.description, json.downloadClient, json.downloadJSON);
 	}
 }
+
