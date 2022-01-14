@@ -16,12 +16,6 @@ export function generateSnapshotCard(snapshot, div) {
 	const snapshotCardTitle = document.createElement('h3');
 	snapshotCardTitle.innerText = snapshot.name;
 	snapshotCard.appendChild(snapshotCardTitle);
-
-	const snapshotCardDownloadButton = document.createElement('button');
-	snapshotCardDownloadButton.innerText = 'Download';
-	snapshotCardDownloadButton.addEventListener('click', () => snapshot.download());
-	snapshotCard.appendChild(snapshotCardDownloadButton);
-
 	div.appendChild(snapshotCard);
 
 	snapshotCard.addEventListener('mouseenter', async () => {
@@ -36,6 +30,11 @@ export function generateSnapshotCard(snapshot, div) {
 			clearTimeout(timer);
 			if (removeHover) snapshotCard.classList.remove('snapshot-card-hover');
 		};
+	});
+
+	snapshotCard.addEventListener('click', () => {
+		snapshotCard.classList.add('snapshot-card-hover');
+		generateSnapshotPage(snapshot, document.body);
 	});
 }
 
@@ -173,4 +172,5 @@ export class Snapshot {
 		return new Snapshot(json.name, new Date(json.releaseTime * 1000), json.description, json.downloadClient, json.downloadJSON);
 	}
 }
+
 
