@@ -31,7 +31,8 @@ export async function generateVersionPage(version) {
 	versionImageAndDescription.appendChild(versionImageDiv);
 
 	const versionImage = document.createElement('img');
-	versionImage.src = await fetch(`../resources/images/${version.imageUrl}`).then(r => r.url);
+	console.log(version);
+	versionImage.src = version.imageUrl;
 	versionImage.className = 'version-image';
 	versionImage.alt = `${version.name} image`;
 	versionImageDiv.appendChild(versionImage);
@@ -101,14 +102,16 @@ export class Version extends Snapshot {
 
 		let descriptionElement = document.createElement('p');
 		descriptionElement.innerHTML = description;
-		let importantDescription = descriptionElement.innerText.split(/\. [A-Z]/).slice(0, 2).join('\n') + '.';
-		if (importantDescription.length > 100) importantDescription = descriptionElement.innerText.split(/\. [A-Z]/)[0] + '.';
-
-		const imageUrl = Object.entries(images).find(([key, value], _) => json.name.toLowerCase().includes(key[0]))[1];
+		const text = descriptionElement.innerText.replace(/\.?\[\d]\.? /g, '. ');
+		let importantDescription = text.split(/\. [A-Z]/).slice(0, 2).join('\n') + '.';
+		if (importantDescription.length > 100) importantDescription = text.replace(/<sup><a>.*?<\/a><\/sup>/g, '').split(/\. [A-Z]/)[0] + '.';
+	
+		const imageUrl = Object.entries(images).find(([key, value], _) => json.name.toLowerCase().endsWith(key))[1];
 
 		const snapshots = json.snapshots.map(Snapshot.getFromJSON);
 		return new Version(json.name, new Date(json.releaseTime), description, json.url, imageUrl, importantDescription, snapshots);
 	}
 }
+
 
 

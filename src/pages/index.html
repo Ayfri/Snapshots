@@ -125,7 +125,7 @@
 						 * @type {Version[]}
 						 */
 						const json = await fetch(input).then(res => res.json());
-						const version = Version.getFromJSON(json[1]);
+						const version = Version.getFromJSON(json[22]);
 						await generateVersionPage(version);
 						button.onclick = null;
 					};
