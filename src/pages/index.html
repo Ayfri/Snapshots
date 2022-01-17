@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<link href="../style" rel="stylesheet">
-		<script defer src="../scripts" type="module"></script>
 		<script src="https://kit.fontawesome.com/74fed0e2b5.js" crossorigin="anonymous"></script>
 		<script src="https://unpkg.com/dayjs@1.10.7/dayjs.min.js"></script>
 		<script src="https://unpkg.com/dayjs@1.10.7/plugin/localizedFormat.js"></script>
@@ -19,116 +18,10 @@
 						>
 					</a>
 				</div>
-				<div class="dropdown">
-					<button class="dropdown-button">
-						Pre-Alpha
-					</button>
-					<div class="dropdown-content">
-						<a href="#">Pre-Classic</a>
-						<a href="#">Classic</a>
-						<a href="#">Indev</a>
-						<a href="#">Infdev</a>
-					</div>
-				</div>
-				<div class="dropdown">
-					<button class="dropdown-button">
-						Alpha-Bêta
-					</button>
-					<div class="dropdown-content">
-						<a href="#">Alpha 1.0-1.2.5</a>
-						<a href="#">Bêta 1.0-1.2</a>
-						<a href="#">Bêta 1.3-1.4</a>
-						<a href="#">Bêta 1.5-1.7</a>
-						<a href="#">Bêta 1.8-1.9</a>
-					</div>
-				</div>
-				<div class="dropdown">
-					<button class="dropdown-button">
-						1.0-1.5
-					</button>
-					<div class="dropdown-content">
-						<a href="#">1.0</a>
-						<a href="#">1.1</a>
-						<a href="#">1.2</a>
-						<a href="#">1.3</a>
-						<a href="#">1.4</a>
-					</div>
-				</div>
-				<div class="dropdown">
-					<button class="dropdown-button">
-						1.5-1.9
-					</button>
-					<div class="dropdown-content">
-						<a href="#">1.5</a>
-						<a href="#">1.6</a>
-						<a href="#">1.7</a>
-						<a href="#">1.8</a>
-						<a href="#">1.9</a>
-					</div>
-				</div>
-				<div class="dropdown">
-					<button class="dropdown-button">
-						1.10-1.14
-					</button>
-					<div class="dropdown-content">
-						<a href="#">1.10</a>
-						<a href="#">1.11</a>
-						<a href="#">1.12</a>
-						<a href="#">1.13</a>
-						<a href="#">1.14</a>
-					</div>
-				</div>
-				<div class="dropdown">
-					<button class="dropdown-button">
-						1.15-1.18
-					</button>
-					<div class="dropdown-content">
-						<a href="#">1.15</a>
-						<a href="#">1.16</a>
-						<a href="#">1.17</a>
-						<a href="#">1.18</a>
-					</div>
-				</div>
-				<div class="dropdown">
-					<button class="dropdown-button">
-						Spéciales
-					</button>
-					<div class="dropdown-content">
-						<a href="#">Poisson d'Avril</a>
-						<a href="#">Expérimentales</a>
-						<a href="#">Autres</a>
-					</div>
-				</div>
-				<div class="dropdown">
-					<button class="dropdown-button">
-						Autres
-					</button>
-					<div class="dropdown-content">
-						<a href="#">Tutoriel</a>
-						<a href="#">Acheter Minecraft</a>
-						<a href="#">Communauté</a>
-						<a href="#">Liens</a>
-					</div>
-				</div>
 			</div>
 			<div class="content">
-				<button id="generate" onclick="">
-					generate
-				</button>
 				<script type="module">
-					import {generateVersionPage, Version} from '../scripts/index.js';
-					
-					const button = document.getElementById('generate');
-					button.onclick = async () => {
-						const input = 'https://raw.githubusercontent.com/Ayfri/minecraft-wiki-scrapper/master/out/versions.json';
-						/**
-						 * @type {Version[]}
-						 */
-						const json = await fetch(input).then(res => res.json());
-						const version = Version.getFromJSON(json[22]);
-						await generateVersionPage(version);
-						button.onclick = null;
-					};
+					import '../scripts/index.js';
 				</script>
 			</div>
 		</div>

@@ -98,7 +98,7 @@ export class Version extends Snapshot {
 	 * @returns {Version}
 	 */
 	static getFromJSON(json) {
-		const description = json.description;
+		const description = json.description ?? '';
 
 		let descriptionElement = document.createElement('p');
 		descriptionElement.innerHTML = description;
@@ -108,7 +108,7 @@ export class Version extends Snapshot {
 	
 		const imageUrl = Object.entries(images).find(([key, value], _) => json.name.toLowerCase().endsWith(key))[1];
 
-		const snapshots = json.snapshots.map(Snapshot.getFromJSON);
+		const snapshots = (json.snapshots ?? []).map(Snapshot.getFromJSON);
 		return new Version(json.name, new Date(json.releaseTime), description, json.url, imageUrl, importantDescription, snapshots);
 	}
 }
