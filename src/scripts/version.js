@@ -71,6 +71,10 @@ export class Version extends Snapshot {
 	/**
 	 * @type {string}
 	 */
+	url;
+	/**
+	 * @type {string}
+	 */
 	importantDescription;
 	/**
 	 * @type {Snapshot[]}
@@ -87,9 +91,10 @@ export class Version extends Snapshot {
 	 * @param {Snapshot[]} snapshots
 	 */
 	constructor(name, date, description, url, imageUrl, importantDescription, snapshots = []) {
-		super(name, date, description, url);
+		super(name, date, description, "", "");
 		this.imageUrl = imageUrl;
 		this.importantDescription = importantDescription;
+		this.url = url;
 		this.snapshots = snapshots;
 	}
 
@@ -100,14 +105,13 @@ export class Version extends Snapshot {
 	static getFromJSON(json) {
 		const description = json.description ?? '';
 
-		let descriptionElement = document.createElement('p');
+		const descriptionElement = document.createElement('p');
 		descriptionElement.innerHTML = description;
 		const text = descriptionElement.innerText.replace(/\.?\[\d]\.? /g, '. ');
-		let importantDescription = text.split(/\. [A-Z]/).slice(0, 2).join('\n') + '.';
-		if (importantDescription.length > 100) importantDescription = text.replace(/<sup><a>.*?<\/a><\/sup>/g, '').split(/\. [A-Z]/)[0] + '.';
-	
-		const imageUrl = Object.entries(images).find(([key, value], _) => json.name.toLowerCase().endsWith(key))[1];
+		let importantDescription = `${text.split(/\. [A-Z]/).slice(0, 2).join('\n')}.`;
+		if (importantDescription.length > 100) importantDescription = `${text.replace(/<sup><a>.*?<\/a><\/sup>/g, '').split(/\. [A-Z]/)[0]}.`;
 
+		const imageUrl = Object.entries(images).find(([key, value], _) => json.name.toLowerCase().endsWith(key))[1];
 		const snapshots = (json.snapshots ?? []).map(Snapshot.getFromJSON);
 		return new Version(json.name, new Date(json.releaseTime), description, json.url, imageUrl, importantDescription, snapshots);
 	}

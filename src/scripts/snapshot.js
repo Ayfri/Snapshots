@@ -66,7 +66,10 @@ function generateSnapshotBody(snapshot) {
 	const snapshotBodyDiv = document.createElement('div');
 	snapshotBodyDiv.className = 'snapshot-body';
 	generateExitButton(snapshot, snapshotBodyDiv);
-	snapshotBodyDiv.appendChild(generateSnapshotTitle(snapshot));
+
+	const snapshotTitle = document.createElement('h1');
+	snapshotTitle.textContent = snapshot.name;
+	snapshotBodyDiv.appendChild(snapshotTitle);
 
 	const snapshotBody = document.createElement('p');
 	snapshotBody.className = 'snapshot-description';
@@ -79,9 +82,9 @@ function generateSnapshotBody(snapshot) {
 	snapshotDate.textContent = parsedDate.isValid() ? parsedDate.format('L') : 'Invalid Date or not found.';
 	snapshotDate.className = 'snapshot-date';
 	snapshotBodyDiv.appendChild(snapshotDate);
-	
+
 	const downloadClientButton = document.createElement('button');
-	downloadClientButton.classList.add('snapshot-download', 'download-client');
+	downloadClientButton.classList.add('snapshot-download', 'download-client', 'btn');
 	downloadClientButton.type = 'submit';
 	downloadClientButton.setAttribute('onclick', `window.open('${snapshot.downloadClient ?? '#'}')`);
 	downloadClientButton.innerText = snapshot.downloadClient ? 'Download Client' : 'Unavailable';
@@ -89,7 +92,7 @@ function generateSnapshotBody(snapshot) {
 	snapshotBodyDiv.appendChild(downloadClientButton);
 
 	const downloadJSONButton = document.createElement('button');
-	downloadJSONButton.classList.add('snapshot-download', 'download-json');
+	downloadJSONButton.classList.add('snapshot-download', 'download-json', 'btn');
 	downloadJSONButton.type = 'submit';
 	downloadJSONButton.setAttribute('onclick', `window.open('${snapshot.downloadJSON ?? '#'}')`);
 	downloadJSONButton.innerText = snapshot.downloadJSON ? 'Download JSON' : 'Unavailable';
@@ -116,24 +119,13 @@ style=" fill:#000000;"><path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10
 	exit.addEventListener('click', snapshotBodyLeaveListener);
 }
 
-/**
- * @param {Snapshot} snapshot
- * @returns {HTMLHeadingElement}
- */
-function generateSnapshotTitle(snapshot) {
-	const snapshotTitle = document.createElement('h1');
-	snapshotTitle.textContent = snapshot.name;
-
-	return snapshotTitle;
-}
-
 export class Snapshot {
 	/**
 	 * @type {string}
 	 */
 	name;
 	/**
-	 * @type {number}
+	 * @type {Date}
 	 */
 	releaseTime;
 	/**

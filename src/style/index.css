@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 @import url("snapshots.css");
 @import url("versions.css");
+@import url('button.css');
+@import url('footer.css');
 
 :root {
     --nav-color: #212F53;
@@ -11,6 +13,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    margin: 0;
 }
 
 .navbar {
