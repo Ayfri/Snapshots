@@ -3,6 +3,7 @@ export * from './version.js';
 import {INPUT_URL} from './constants.js';
 import {fixDropDowns} from './CSSFixes.js';
 import {createMenu} from './menu.js';
+import {assignButtons} from './buttons.js';
 
 /**
  * @type {Version[]}
@@ -16,4 +17,5 @@ export async function onLoad() {
 	json = await (await fetch(INPUT_URL)).json();
 	createMenu();
 	fixDropDowns();
+	assignButtons();
 }
