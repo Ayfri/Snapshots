@@ -75,3 +75,46 @@
 .dropdown:hover .dropdown-content {
 	display: block;
 }
+
+@media (orientation: portrait) {
+	.navbar {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		width: 98%;
+	}
+
+	.navbar a {
+		padding: 0;
+	}
+
+	.dropdown {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+	}
+
+	.dropdown .dropdown-button {
+		width: 100%;
+		padding: 10px;
+		font-size: 1.4em;
+	}
+
+	.dropdown-content {
+		width: 100%;
+		left: 0;
+		top: calc(100% + 10px);
+		position: relative;
+		border-radius: 0 0 var(--dropdown-border-radius) var(--dropdown-border-radius);
+	}
+
+	.dropdown-content a {
+		padding: 10px;
+	}
+
+	.dropdown, .dropdown-content a {
+		font-size: 1.4em;
+	}
+}

@@ -1,5 +1,6 @@
 :root {
 	--footer-height: 40px;
+	--icon-size: 35px;
 }
 
 .footer {
@@ -27,7 +28,6 @@
 	color: #ffffff;
 	margin: 0 0 10px;
 	padding: 0;
-	transition: ease 0.25s;
 }
 
 .footer p.footer-links a {
@@ -35,7 +35,6 @@
 	line-height: 1.8;
 	text-decoration: none;
 	color: inherit;
-	transition: ease 0.25s;
 }
 
 .footer .footer-links a:before {
@@ -59,16 +58,15 @@
 
 .footer .footer-right a {
 	display: inline-block;
-	width: 35px;
-	height: 35px;
+	width: var(--icon-size);
+	height: var(--icon-size);
 	background-color: #33383b;
 	border-radius: 2px;
 	font-size: 20px;
 	color: #ffffff;
 	text-align: center;
-	line-height: 35px;
+	line-height: var(--icon-size);
 	margin-left: 3px;
-	transition: all 0.25s;
 }
 
 .footer .footer-right a:hover {
@@ -92,5 +90,34 @@
 
 	.footer .footer-left p.footer-links {
 		line-height: 1.8;
+	}
+}
+
+@media (orientation: portrait) {
+	:root {
+		--footer-height: 40px;
+		--icon-size: 60px;
+	}
+
+	.footer {
+		position: fixed;
+		bottom: 0;
+	}
+
+	.footer .footer-left p {
+		font-size: max(1.2em, 100vw / 50);
+	}
+
+	.footer .footer-left p.footer-links {
+		font-size: max(1.5em, 100vw / 40);
+	}
+
+	.footer .footer-right a i {
+		padding-top: 0.5em;
+		font-size: 30px;
+	}
+
+	.page {
+		margin-bottom: calc(var(--footer-height) * 3.5);
 	}
 }
