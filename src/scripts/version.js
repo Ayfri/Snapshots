@@ -7,7 +7,7 @@ import {generateSnapshotCard, Snapshot} from './snapshot.js';
  * @param {Version} version
  */
 export async function generateVersionPage(version) {
-	const content = document.getElementsByClassName('content')[0];
+	const content = document.querySelector('.content');
 	const versionPage = document.createElement('div');
 	versionPage.className = 'version-page';
 
@@ -59,8 +59,9 @@ export async function generateVersionPage(version) {
 	version.snapshots.forEach(snapshot => generateSnapshotCard(snapshot, versionSnapshots));
 
 	content.appendChild(versionPage);
+	document.querySelector('.home').style.display = 'none';
 	fixGridCount();
-	window.addEventListener('resize', () => fixGridCount());
+	window.addEventListener('resize', fixGridCount);
 }
 
 export class Version extends Snapshot {

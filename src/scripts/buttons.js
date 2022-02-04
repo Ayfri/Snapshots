@@ -1,5 +1,6 @@
 export function assignButtons() {
 	const links = document.querySelector('.footer-links').children;
+	links[0].addEventListener('click', home);
 	links[1].addEventListener('click', randomVersion);
 	links[2].addEventListener('click', latestVersion);
 }
@@ -15,4 +16,9 @@ function latestVersion() {
 		.flatMap(e => [...e.children])
 		.filter(e => e.parentElement.parentElement.querySelector('button').innerText !== 'Others');
 	menu[menu.length - 1].click();
+}
+
+function home() {
+	document.querySelector('.home').style.display = 'flex';
+	document.querySelector('.content').innerHTML = '';
 }

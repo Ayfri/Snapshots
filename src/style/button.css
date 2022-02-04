@@ -11,26 +11,42 @@
 }
 
 .btn {
-    height: var(--btn-size);
-    width: calc(var(--btn-size) * 8);
-    font-family: 'Minecraft', sans-serif;
-    cursor: pointer;
-    overflow: hidden;
-    white-space: nowrap;
-    user-select: none;
     background: rgb(68, 68, 68) url('https://i.ibb.co/rb2TWXL/bgbtn.png') center / cover;
-    image-rendering: pixelated;
     border: 2px solid #000;
-    padding-bottom: 0.3em;
-    color: white;
-    text-shadow: 2px 2px #000A;
     box-shadow: inset -2px -4px #0006, inset 2px 2px #FFF7;
+    color: white;
+    cursor: pointer;
+    display: block;
+    image-rendering: pixelated;
+    height: var(--btn-size);
+    font-family: 'Minecraft', sans-serif;
+    overflow: hidden;
+    padding-bottom: 0.3em;
+    position: relative;
+    text-shadow: 2px 2px #000A;
+    user-select: none;
+    width: calc(var(--btn-size) * 8);
+    white-space: nowrap;
 }
 
 .btn:hover {
-    background: rgba(77, 77, 167, 0.45) center / cover;
+    background: rgba(156, 156, 255, 0.35) center / cover;
     text-shadow: 2px 2px #202013CC;
     color: #FFFFA0;
+}
+
+.btn:hover::after {
+    background: url('https://i.ibb.co/rb2TWXL/bgbtn.png');
+    content: "";
+    color: red;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
 }
 
 .btn:active {
@@ -40,8 +56,8 @@
 .btn:disabled {
     background: rgb(49, 49, 49) center / cover;
     color: #a0a0a0;
+    cursor: not-allowed;
     text-shadow: 2px 2px #000A;
-    /*box-shadow: inset -2px -4px #0006, inset 2px 2px #FFF7;*/
     box-shadow: none;
 }
 

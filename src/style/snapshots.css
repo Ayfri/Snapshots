@@ -8,9 +8,8 @@
     flex-direction: column;
     max-width: 800px;
     padding: 0.8em;
-    width: 90%;
-
     transition: background-color .2s ease-in-out, box-shadow .2s ease-in-out, transform .2s ease-in-out;
+    width: 90%;
 }
 
 .snapshot-card-hover {
@@ -64,12 +63,6 @@
 
 .snapshot-description {
     width: 70%;
-}
-
-.snapshot-download {
-	margin: 5px;
-	padding: 4px;
-	width: 10em;
 }
 
 .snapshot-date {
