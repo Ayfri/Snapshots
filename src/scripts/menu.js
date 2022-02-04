@@ -20,7 +20,9 @@ export function createMenu() {
 					const item = document.createElement('a');
 					item.href = '#';
 					item.innerText = version.name.replace('1.0.0', '1.0');
+					if ([...dropdownItem.children].find(e => e.innerText.endsWith(item.innerText))) return;
 					dropdownItem.appendChild(item);
+
 					item.onclick = async () => {
 						const ver = json.find(v => v.name === version.name);
 						const content = document.querySelector('.content');

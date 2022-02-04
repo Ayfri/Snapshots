@@ -121,7 +121,7 @@ export class Version extends Snapshot {
 		if (importantDescription.length > 100) importantDescription = `${text.replace(/<sup><a>.*?<\/a><\/sup>/g, '').split(/\. [A-Z]/)[0]}.`;
 
 		const imageUrl = Object.entries(images).find(([key, value], _) => json.name.toLowerCase().endsWith(key))[1];
-		const snapshots = (json.snapshots ?? []).map(Snapshot.getFromJSON);
+		const snapshots = (json.snapshots ?? []).map(Snapshot.getFromJSON).filter(snapshot => !snapshot.name.toLowerCase().includes('server'));
 		return new Version(json.name, new Date(json.releaseTime), description, json.url, imageUrl, importantDescription, snapshots);
 	}
 }
