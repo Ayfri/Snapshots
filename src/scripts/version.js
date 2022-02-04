@@ -17,7 +17,6 @@ function generateVersionBody(versionPage, version) {
 	versionImageAndDescription.appendChild(versionImageDiv);
 
 	const versionImage = document.createElement('img');
-	console.log(version);
 	versionImage.src = version.imageUrl;
 	versionImage.className = 'version-image';
 	versionImage.alt = `${version.name} image`;
@@ -27,7 +26,7 @@ function generateVersionBody(versionPage, version) {
 	versionDescription.className = 'version-description';
 	versionDescription.innerHTML = version.description.replace(/\. (<sup>.*?<\/sup>)?/g, '.$1<br>');
 	[...versionDescription.querySelectorAll('a')]
-		.filter(a => a.href.startsWith('/wiki/'))
+		.filter(a => a.getAttribute('href').startsWith('/wiki/'))
 		.forEach(a => (a.href = MINECRAFT_WIKI_LINK + a.getAttribute('href')));
 	versionImageAndDescription.appendChild(versionDescription);
 
