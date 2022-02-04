@@ -28,8 +28,6 @@ body {
 }
 
 .navbar a {
-    float: left;
-    font-size: 16px;
     color: white;
     text-align: center;
     padding: 10px 12px;
@@ -44,13 +42,14 @@ body {
 .dropdown .dropdown-button {
     font-size: 16px;
     border: none;
-    outline: none;
     color: black;
-    padding: 10px 50px;
+    padding: 10px calc(2.5vw);
     background-color: var(--button-background);
     border-radius: var(--dropdown-border-radius);
     font-family: inherit;
     margin: 0;
+    user-select: none;
+    white-space: pre-line;
 }
 
 .dropdown:hover .dropdown-button {
@@ -62,15 +61,11 @@ body {
     border-radius: 0 0 var(--dropdown-border-radius) var(--dropdown-border-radius);
 }
 
-.navbar a:hover .dropdown:hover .dropdown-button {
-    background-color: var(--nav-color);
-}
-
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 100px;
+    min-width: 80px;
     box-shadow: 0 var(--dropdown-border-radius) 16px 0 rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 0 0 var(--dropdown-border-radius) var(--dropdown-border-radius);
@@ -87,6 +82,10 @@ body {
 
 .dropdown-content a:hover {
     background-color: #ddd;
+}
+
+.dropdown-content a:last-child{
+    border-radius: 0 0 var(--dropdown-border-radius) var(--dropdown-border-radius) !important;
 }
 
 .dropdown:hover .dropdown-content {
