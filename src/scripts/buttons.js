@@ -21,4 +21,5 @@ function latestVersion() {
 function home() {
 	document.querySelector('.home').style.display = 'flex';
 	document.querySelector('.content').innerHTML = '';
+	document.title = 'VersionCraft - Home';
 }

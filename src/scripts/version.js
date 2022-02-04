@@ -3,21 +3,7 @@ import {fixGridCount} from './CSSFixes.js';
 import images from '../resources/images.json' assert {type: 'json'};
 import {generateSnapshotCard, Snapshot} from './snapshot.js';
 
-/**
- * @param {Version} version
- */
-export async function generateVersionPage(version) {
-	const content = document.querySelector('.content');
-	const versionPage = document.createElement('div');
-	versionPage.className = 'version-page';
-
-	const versionHeader = document.createElement('div');
-	versionHeader.className = 'version-header';
-	const title = document.createElement('h1');
-	title.textContent = version.name;
-	versionHeader.appendChild(title);
-	versionPage.appendChild(versionHeader);
-
+function generateVersionBody(versionPage, version) {
 	const versionBody = document.createElement('div');
 	versionBody.className = 'version-body';
 	versionPage.appendChild(versionBody);
@@ -54,11 +40,31 @@ export async function generateVersionPage(version) {
 	const versionSnapshots = document.createElement('div');
 	versionSnapshots.className = 'version-snapshots';
 	versionBody.appendChild(versionSnapshots);
+}
 
-	version.snapshots.forEach(snapshot => generateSnapshotCard(snapshot, versionSnapshots));
+/**
+ * @param {Version} version
+ */
+export async function generateVersionPage(version) {
+	const content = document.querySelector('.content');
+	const versionPage = document.createElement('div');
+	versionPage.className = 'version-page';
+
+	const versionHeader = document.createElement('div');
+	versionHeader.className = 'version-header';
+
+	const title = document.createElement('h1');
+	title.textContent = version.name;
+	versionHeader.appendChild(title);
+	versionPage.appendChild(versionHeader);
+
+	generateVersionBody(versionPage, version);
+
+	version.snapshots.forEach(snapshot => generateSnapshotCard(snapshot, versionPage.querySelector('.version-snapshots')));
 
 	content.appendChild(versionPage);
 	document.querySelector('.home').style.display = 'none';
+	document.title = version.name;
 	fixGridCount();
 	window.addEventListener('resize', fixGridCount);
 }
