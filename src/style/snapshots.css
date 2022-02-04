@@ -1,85 +1,84 @@
 .snapshot-card {
-    background: #e5e5e5;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    box-shadow: 0 0 10px #ccc;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    max-width: 800px;
-    padding: 0.8em;
-    transition: background-color .2s ease-in-out, box-shadow .2s ease-in-out, transform .2s ease-in-out;
-    width: 90%;
+	background: #e5e5e5;
+	border: 1px solid #ccc;
+	border-radius: 12px;
+	box-shadow: 0 0 10px #ccc;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	max-width: 800px;
+	padding: 0.8em;
+	transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+	width: 90%;
 }
 
 .snapshot-card-hover {
-    box-shadow: 0 0 15px #aaa, 0 0 20px #fff inset;
-    background: #ececec;
-    transform: translate(-2px, -2px);
+	box-shadow: 0 0 15px #aaa, 0 0 20px #fff inset;
+	background: #ececec;
+	transform: translate(-2px, -2px);
 }
 
 .snapshot-title {
-    margin-bottom: 1em;
+	margin-bottom: 1em;
 }
 
 .snapshot-title h1 {
-    font-size: 1.3em;
-    font-weight: bold;
-    margin: 0;
+	font-size: 1.3em;
+	font-weight: bold;
+	margin: 0;
 }
 
 .snapshot-body {
-    background: #e5e5e5;
-    border-radius: 12px;
-    box-sizing: border-box;
-    box-shadow: 0 0 10px #888;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #333;
-    flex-direction: column;
-    position: fixed;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    padding: 2em;
-    width: 70%;
-    height: 70%;
-    z-index: 25;
+	background: #e5e5e5;
+	border-radius: 12px;
+	box-sizing: border-box;
+	box-shadow: 0 0 10px #888;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #333;
+	flex-direction: column;
+	position: fixed;
+	margin: auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	padding: 2em;
+	width: 70%;
+	height: 70%;
+	z-index: 25;
 }
 
 #snapshot-page {
-    background-color: #00000050;
-    top: 0;
-    left: 0;
-    position: fixed;
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-    z-index: 20;
+	background-color: #00000050;
+	top: 0;
+	left: 0;
+	position: fixed;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+	z-index: 20;
 }
 
 .snapshot-description {
-    width: 70%;
+	width: 70%;
 }
 
 .snapshot-date {
-    font-size: 0.8em;
-    font-style: italic;
-    margin-bottom: 1em;
-    color: #888;
+	font-size: 0.8em;
+	font-style: italic;
+	margin-bottom: 1em;
+	color: #888;
 }
 
 .exit-button {
-    position: absolute;
-    top: 4vh;
-    right: 4vh;
-    width: min(20px, 5vh);
+	position: absolute;
+	top: 4vh;
+	right: 4vh;
+	width: min(20px, 5vh);
 }
 
 .exit-button:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
-

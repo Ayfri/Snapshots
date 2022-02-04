@@ -1,6 +1,6 @@
 import {MINECRAFT_WIKI_LINK} from './constants.js';
 import {fixGridCount} from './CSSFixes.js';
-import images from '../resources/images.json' assert {type: 'json'}
+import images from '../resources/images.json' assert {type: 'json'};
 import {generateSnapshotCard, Snapshot} from './snapshot.js';
 
 /**
@@ -37,13 +37,12 @@ export async function generateVersionPage(version) {
 	versionImage.alt = `${version.name} image`;
 	versionImageDiv.appendChild(versionImage);
 
-
 	const versionDescription = document.createElement('p');
 	versionDescription.className = 'version-description';
-	versionDescription.innerHTML = version.description.replace(/\. (<sup>.*?<\/sup>)?/g, ".$1<br>");
+	versionDescription.innerHTML = version.description.replace(/\. (<sup>.*?<\/sup>)?/g, '.$1<br>');
 	[...versionDescription.querySelectorAll('a')]
 		.filter(a => a.href.startsWith('/wiki/'))
-        .forEach(a => a.href = MINECRAFT_WIKI_LINK + a.getAttribute('href'));
+		.forEach(a => (a.href = MINECRAFT_WIKI_LINK + a.getAttribute('href')));
 	versionImageAndDescription.appendChild(versionDescription);
 
 	const versionImportantDescription = document.createElement('p');
@@ -92,7 +91,7 @@ export class Version extends Snapshot {
 	 * @param {Snapshot[]} snapshots
 	 */
 	constructor(name, date, description, url, imageUrl, importantDescription, snapshots = []) {
-		super(name, date, description, "", "");
+		super(name, date, description, '', '');
 		this.imageUrl = imageUrl;
 		this.importantDescription = importantDescription;
 		this.url = url;
@@ -109,7 +108,10 @@ export class Version extends Snapshot {
 		const descriptionElement = document.createElement('p');
 		descriptionElement.innerHTML = description;
 		const text = descriptionElement.innerText.replace(/\.?\[\d]\.? /g, '. ');
-		let importantDescription = `${text.split(/\. [A-Z]/).slice(0, 2).join('\n')}.`;
+		let importantDescription = `${text
+			.split(/\. [A-Z]/)
+			.slice(0, 2)
+			.join('\n')}.`;
 		if (importantDescription.length > 100) importantDescription = `${text.replace(/<sup><a>.*?<\/a><\/sup>/g, '').split(/\. [A-Z]/)[0]}.`;
 
 		const imageUrl = Object.entries(images).find(([key, value], _) => json.name.toLowerCase().endsWith(key))[1];
@@ -117,6 +119,3 @@ export class Version extends Snapshot {
 		return new Version(json.name, new Date(json.releaseTime), description, json.url, imageUrl, importantDescription, snapshots);
 	}
 }
-
-
-

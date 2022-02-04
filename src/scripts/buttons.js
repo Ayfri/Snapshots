@@ -6,7 +6,7 @@ export function assignButtons() {
 }
 
 function randomVersion() {
-	const menu = [...document.querySelectorAll('.dropdown-content')].flatMap( e => [...e.children]);
+	const menu = [...document.querySelectorAll('.dropdown-content')].flatMap(e => [...e.children]);
 	const random = Math.floor(Math.random() * menu.length);
 	menu[random].click();
 }

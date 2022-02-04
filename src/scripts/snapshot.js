@@ -1,4 +1,4 @@
-import {MINECRAFT_WIKI_LINK} from "./constants.js"
+import {MINECRAFT_WIKI_LINK} from './constants.js';
 
 const snapshotBodyLeaveListener = () => {
 	document.querySelectorAll('.snapshot-card-hover').forEach(card => card.classList.remove('snapshot-card-hover'));
@@ -75,7 +75,7 @@ function generateSnapshotBody(snapshot) {
 	snapshotBody.className = 'snapshot-description';
 	snapshotBody.innerHTML = snapshot.description;
 	snapshotBodyDiv.appendChild(snapshotBody);
-	snapshotBody.querySelectorAll('a').forEach(a => a.href = MINECRAFT_WIKI_LINK + a.getAttribute('href'));
+	snapshotBody.querySelectorAll('a').forEach(a => (a.href = MINECRAFT_WIKI_LINK + a.getAttribute('href')));
 
 	const snapshotDate = document.createElement('p');
 	const parsedDate = dayjs(snapshot.releaseTime);
@@ -98,7 +98,6 @@ function generateSnapshotBody(snapshot) {
 	downloadJSONButton.innerText = snapshot.downloadJSON ? 'Download JSON' : 'Unavailable';
 	if (!snapshot.downloadJSON) downloadJSONButton.disabled = true;
 	snapshotBodyDiv.appendChild(downloadJSONButton);
-
 
 	return snapshotBodyDiv;
 }
@@ -164,5 +163,3 @@ export class Snapshot {
 		return new Snapshot(json.name, new Date(json.releaseTime * 1000), json.description, json.downloadClient, json.downloadJSON);
 	}
 }
-
-

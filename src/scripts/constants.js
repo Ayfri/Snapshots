@@ -1,5 +1,5 @@
 export const INPUT_URL = 'https://raw.githubusercontent.com/Ayfri/minecraft-wiki-scrapper/master/out/versions.json';
-export const MINECRAFT_WIKI_LINK = "https://minecraft.gamepedia.com";
+export const MINECRAFT_WIKI_LINK = 'https://minecraft.gamepedia.com';
 export const menuList = [
 	['pre-classic', 'classic', 'indev', 'infdev'],
 	['alpha', 'beta'],

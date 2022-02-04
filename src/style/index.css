@@ -1,80 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
-@import url("snapshots.css");
-@import url("versions.css");
+@import url('snapshots.css');
+@import url('versions.css');
 @import url('button.css');
 @import url('footer.css');
 @import url('menu.css');
 
 :root {
-    --nav-color: #212F53;
-    --button-background: #dddddd;
-    --dropdown-border-radius: 8px;
+	--nav-color: #212f53;
+	--button-background: #dddddd;
+	--dropdown-border-radius: 8px;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    margin: 0;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	margin: 0;
 }
 
 .page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 80vh;
-    padding: 0 10vw;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 80vh;
+	padding: 0 10vw;
 }
 
 .image-title {
-    margin: 2em;
+	margin: 2em;
 }
 
 .tutorial {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
 }
 
 .tutorial ol {
-    font-size: 1.2em;
+	font-size: 1.2em;
 }
 
 .tutorial li {
-    margin-bottom: 0.6em;
-    line-height: 1.7em;
+	margin-bottom: 0.6em;
+	line-height: 1.7em;
 }
 
-.tutorial code, .tutorial kbd {
-    font-family: monospace;
-    color: #292c2f;
-    background-color: #ececec;
-    border: 1px solid #b4b4b4;
-    padding: 0.1em;
-    border-radius: 5px;
-    white-space: nowrap;
+.tutorial code,
+.tutorial kbd {
+	font-family: monospace;
+	color: #292c2f;
+	background-color: #ececec;
+	border: 1px solid #b4b4b4;
+	padding: 0.1em;
+	border-radius: 5px;
+	white-space: nowrap;
 }
 
 .tutorial kbd {
-    border: 1px solid #b4b4b4;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
-    font-weight: bold;
+	border: 1px solid #b4b4b4;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+	font-weight: bold;
 }
 
 .logo {
-    padding: 0 10px 0 0;
+	padding: 0 10px 0 0;
 }
 
 .logo a {
-    padding: 0;
+	padding: 0;
 }
 
 .logo img {
-    width: 40px;
-    height: 40px;
+	width: 40px;
+	height: 40px;
 }

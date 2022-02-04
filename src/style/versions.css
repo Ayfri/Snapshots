@@ -1,80 +1,80 @@
 .version-page {
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    box-shadow: 0 0 10px #ccc;
-    margin: 0.5em auto 2em auto;
-    padding: 1em;
-    width: 90vw;
-    min-height: 50vh;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 20px;
+	box-shadow: 0 0 10px #ccc;
+	margin: 0.5em auto 2em auto;
+	padding: 1em;
+	width: 90vw;
+	min-height: 50vh;
 }
 
 .version-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .version-image-and-description {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
 }
 
 .version-image-div {
-    display: flex;
-    flex-direction: column;
-    font-size: 1.4em;
-    justify-content: space-around;
-    align-items: flex-start;
-    margin-bottom: 1em;
+	display: flex;
+	flex-direction: column;
+	font-size: 1.4em;
+	justify-content: space-around;
+	align-items: flex-start;
+	margin-bottom: 1em;
 }
 
 .version-image {
-    border: 1px solid #dddddd;
-    border-radius: 5px;
-    box-shadow: 0 0 10px #bbb;
-    display: block;
-    aspect-ratio: 16/9;
-    width: auto;
-    height: auto;
-    min-width: 40vw;
-    max-width: 50vw;
-    max-height: 60vh;
+	border: 1px solid #dddddd;
+	border-radius: 5px;
+	box-shadow: 0 0 10px #bbb;
+	display: block;
+	aspect-ratio: 16/9;
+	width: auto;
+	height: auto;
+	min-width: 40vw;
+	max-width: 50vw;
+	max-height: 60vh;
 }
 
 .version-description {
-    padding: 2.5vw;
-    height: 100%;
-    font-size: 1.3em;
+	padding: 2.5vw;
+	height: 100%;
+	font-size: 1.3em;
 }
 
 .version-header h1 {
-    font-size: 2.5em;
+	font-size: 2.5em;
 }
 
 .version-important-description {
-    border: 1px solid #dddddd;
-    border-radius: 5px;
-    float: left;
-    height: 25%;
-    padding: 5px;
-    width: auto;
+	border: 1px solid #dddddd;
+	border-radius: 5px;
+	float: left;
+	height: 25%;
+	padding: 5px;
+	width: auto;
 }
 
 .version-snapshots {
-    background: #ddd;
-    border: 1px solid #dddddd;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: repeat(1, minmax(200px, 1fr));
-    grid-gap: 1em 0;
-    padding: 1em;
-    position: relative;
-    width: 90%;
-    min-width: 40vw;
-    height: 75%;
-    justify-items: center;
+	background: #ddd;
+	border: 1px solid #dddddd;
+	border-radius: 10px;
+	display: grid;
+	grid-template-columns: repeat(1, minmax(200px, 1fr));
+	grid-gap: 1em 0;
+	padding: 1em;
+	position: relative;
+	width: 90%;
+	min-width: 40vw;
+	height: 75%;
+	justify-items: center;
 }
