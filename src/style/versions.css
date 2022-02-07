@@ -1,8 +1,8 @@
 .version-page {
 	background: #fff;
 	border: 1px solid #ccc;
-	border-radius: 20px;
-	box-shadow: 0 0 10px #ccc;
+	border-radius: var(--page-border-radius);
+	box-shadow: 0 0 10px var(--shadow-color);
 	margin: 0.5em auto 2em auto;
 	padding: 1em;
 	width: 90vw;

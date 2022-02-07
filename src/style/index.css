@@ -6,9 +6,13 @@
 @import url('menu.css');
 
 :root {
-	--nav-color: #212f53;
+	--background-color: #a0a0a0;
+	--brighten-color: #eeeeee;
 	--button-background: #dddddd;
 	--dropdown-border-radius: 8px;
+	--nav-color: #212f53;
+	--page-border-radius: 20px;
+	--shadow-color: #777777;
 }
 
 body {
@@ -21,6 +25,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	background-color: var(--background-color);
 }
 
 .home {
@@ -29,7 +34,6 @@ body {
 	align-items: center;
 	height: 80vh;
 	padding: 0 10vw;
-	background-color: #8d8d8d;
 }
 
 .image-title {
@@ -37,9 +41,18 @@ body {
 }
 
 .tutorial {
+	align-items: start;
+	background-color: var(--brighten-color);
+	border-radius: var(--page-border-radius);
+	box-shadow: 0 0 10px var(--shadow-color);
 	display: flex;
 	flex-direction: column;
-	align-items: start;
+	padding: 1em;
+}
+
+.tutorial h2 {
+	margin: 0.5em;
+	font-size: 1.8em;
 }
 
 .tutorial ol {
@@ -55,7 +68,7 @@ body {
 .tutorial kbd {
 	font-family: monospace;
 	color: #292c2f;
-	background-color: #ececec;
+	background-color: var(--brighten-color);
 	border: 1px solid #b4b4b4;
 	padding: 0.1em;
 	border-radius: 5px;
