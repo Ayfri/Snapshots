@@ -39,6 +39,64 @@ function generateVersionBody(versionPage, version) {
 	const versionSnapshots = document.createElement('div');
 	versionSnapshots.className = 'version-snapshots';
 	versionBody.appendChild(versionSnapshots);
+
+	generateVersionListButtons(version, versionSnapshots);
+
+	const versionSnapshotsList = document.createElement('div');
+	versionSnapshotsList.className = 'version-snapshots-list';
+	versionSnapshots.appendChild(versionSnapshotsList);
+	versionBody.appendChild(versionSnapshots);
+}
+
+/**
+ * @param {HTMLElement} div
+ * @param {string} name
+ * @param {(event: Event) => void} onChange
+ * @param {boolean} checked
+ */
+export function createCheckBox(div, name, onChange = () => {}, checked = true) {
+	const checkBox = document.createElement('input');
+	checkBox.type = 'checkbox';
+	checkBox.className = 'version-checkbox';
+	checkBox.checked = checked;
+	checkBox.onchange = onChange;
+
+	const checkBoxLabel = document.createElement('label');
+	checkBoxLabel.className = 'version-checkbox-label';
+	checkBoxLabel.textContent = name;
+	checkBoxLabel.appendChild(checkBox);
+
+	div.appendChild(checkBoxLabel);
+}
+
+/**
+ * @param {Version} version
+ * @param {HTMLDivElement} div
+ */
+export function generateVersionListButtons(version, div) {
+	const filters = document.createElement('form');
+	filters.className = 'version-filters';
+	div.appendChild(filters);
+
+	createCheckBox(filters, 'Snapshots', () => {
+		const elementNodeListOf = document.querySelectorAll('.version-card-snapshot');
+		elementNodeListOf.forEach(card => card.classList.toggle('hidden'));
+	});
+
+	createCheckBox(filters, 'Pre-Releases', () => {
+		const elementNodeListOf = document.querySelectorAll('.version-card-pre-release');
+		elementNodeListOf.forEach(card => card.classList.toggle('hidden'));
+	});
+
+	createCheckBox(filters, 'Release Candidates', () => {
+		const elementNodeListOf = document.querySelectorAll('.version-card-candidate');
+		elementNodeListOf.forEach(card => card.classList.toggle('hidden'));
+	});
+
+	createCheckBox(filters, 'Releases', () => {
+		const elementNodeListOf = document.querySelectorAll('.version-card-release');
+		elementNodeListOf.forEach(card => card.classList.toggle('hidden'));
+	});
 }
 
 /**
@@ -59,7 +117,7 @@ export async function generateVersionPage(version) {
 
 	generateVersionBody(versionPage, version);
 
-	version.snapshots.forEach(snapshot => generateSnapshotCard(snapshot, versionPage.querySelector('.version-snapshots')));
+	version.snapshots.forEach(snapshot => generateSnapshotCard(snapshot, versionPage.querySelector('.version-snapshots-list')));
 
 	content.appendChild(versionPage);
 	document.querySelector('.home').style.display = 'none';

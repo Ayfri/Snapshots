@@ -12,6 +12,21 @@ const snapshotBodyLeaveListener = () => {
 export function generateSnapshotCard(snapshot, div) {
 	const snapshotCard = document.createElement('div');
 	snapshotCard.className = 'snapshot-card';
+	switch (snapshot.type) {
+		case 'snapshot':
+			snapshotCard.classList.add('version-card-snapshot');
+			break;
+		case 'pre-release':
+			snapshotCard.classList.add('version-card-pre-release');
+			break;
+		case 'candidate':
+			snapshotCard.classList.add('version-card-candidate');
+			break;
+		default:
+			snapshotCard.classList.add('version-card-release');
+			break;
+	}
+
 
 	const snapshotCardTitle = document.createElement('h3');
 	snapshotCardTitle.innerText = snapshot.name;
@@ -139,6 +154,10 @@ export class Snapshot {
 	 * @type {string}
 	 */
 	downloadJSON;
+	/**
+	 * @type {'snapshot'|'pre-release'|'candidate'|'release'}
+	 */
+	type;
 
 	/**
 	 * @param {string} name
@@ -153,6 +172,16 @@ export class Snapshot {
 		this.description = description;
 		this.downloadClient = downloadClient;
 		this.downloadJSON = downloadJSON;
+
+		if (/(\d{1,2}w\d{1,2}[a-z])|(preview)|(test)|(experimental snapshot)/i.test(name)) {
+			this.type = 'snapshot';
+		} else if (/(1\.\d{1,2}.\d{1,2}-pre)|(1\.\d{1,2}(\.\d{1,2})? pre-?release)/i.test(name)) {
+			this.type = 'pre-release';
+		} else if (/(1\.\d{1,2}.\d{1,2}-rc)|(RC\d)|(1\.\d{1,2}(\.\d{1,2})? release[- ]candidate)/i.test(name)) {
+			this.type = 'candidate';
+		} else {
+			this.type = 'release';
+		}
 	}
 
 	/**

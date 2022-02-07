@@ -68,13 +68,25 @@
 	background: #ddd;
 	border: 1px solid #dddddd;
 	border-radius: 10px;
+	padding: 1em;
+	height: 75%;
+	min-width: 40vw;
+	position: relative;
+	width: 90%;
+}
+
+.version-filters {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin: 1em;
+	user-select: none;
+}
+
+.version-snapshots-list {
 	display: grid;
 	grid-template-columns: repeat(1, minmax(200px, 1fr));
 	grid-gap: 1em 0;
-	padding: 1em;
-	position: relative;
-	width: 90%;
-	min-width: 40vw;
-	height: 75%;
 	justify-items: center;
 }
