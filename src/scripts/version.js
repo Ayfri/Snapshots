@@ -78,22 +78,22 @@ export function generateVersionListButtons(version, div) {
 	filters.className = 'version-filters';
 	div.appendChild(filters);
 
-	createCheckBox(filters, 'Snapshots', () => {
+	createCheckBox(filters, `Snapshots (${version.getTypeSize('snapshot')})`, () => {
 		const elementNodeListOf = document.querySelectorAll('.version-card-snapshot');
 		elementNodeListOf.forEach(card => card.classList.toggle('hidden'));
 	});
 
-	createCheckBox(filters, 'Pre-Releases', () => {
+	createCheckBox(filters, `Pre-Releases (${version.getTypeSize('pre-release')})`, () => {
 		const elementNodeListOf = document.querySelectorAll('.version-card-pre-release');
 		elementNodeListOf.forEach(card => card.classList.toggle('hidden'));
 	});
 
-	createCheckBox(filters, 'Release Candidates', () => {
+	createCheckBox(filters, `Release Candidates (${version.getTypeSize('candidate')})`, () => {
 		const elementNodeListOf = document.querySelectorAll('.version-card-candidate');
 		elementNodeListOf.forEach(card => card.classList.toggle('hidden'));
 	});
 
-	createCheckBox(filters, 'Releases', () => {
+	createCheckBox(filters, `Releases (${version.getTypeSize('release')})`, () => {
 		const elementNodeListOf = document.querySelectorAll('.version-card-release');
 		elementNodeListOf.forEach(card => card.classList.toggle('hidden'));
 	});
@@ -180,5 +180,13 @@ export class Version extends Snapshot {
 		const imageUrl = Object.entries(images).find(([key, value], _) => json.name.toLowerCase().endsWith(key))[1];
 		const snapshots = (json.snapshots ?? []).map(Snapshot.getFromJSON).filter(snapshot => !snapshot.name.toLowerCase().includes('server'));
 		return new Version(json.name, new Date(json.releaseTime), description, json.url, imageUrl, importantDescription, snapshots);
+	}
+
+	/**
+	 * @param {'snapshot'|'pre-release'|'candidate'|'release'}type
+	 * @returns {number}
+	 */
+	getTypeSize(type) {
+		return this.snapshots.filter(s => s.snapshotType === type).length;
 	}
 }

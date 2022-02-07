@@ -12,7 +12,7 @@ const snapshotBodyLeaveListener = () => {
 export function generateSnapshotCard(snapshot, div) {
 	const snapshotCard = document.createElement('div');
 	snapshotCard.className = 'snapshot-card';
-	switch (snapshot.type) {
+	switch (snapshot.snapshotType) {
 		case 'snapshot':
 			snapshotCard.classList.add('version-card-snapshot');
 			break;
@@ -26,7 +26,6 @@ export function generateSnapshotCard(snapshot, div) {
 			snapshotCard.classList.add('version-card-release');
 			break;
 	}
-
 
 	const snapshotCardTitle = document.createElement('h3');
 	snapshotCardTitle.innerText = snapshot.name;
@@ -157,7 +156,7 @@ export class Snapshot {
 	/**
 	 * @type {'snapshot'|'pre-release'|'candidate'|'release'}
 	 */
-	type;
+	snapshotType;
 
 	/**
 	 * @param {string} name
@@ -165,22 +164,25 @@ export class Snapshot {
 	 * @param {string} description
 	 * @param {string} downloadClient
 	 * @param {string} downloadJSON
+	 * @param {string} type
 	 */
-	constructor(name, date, description, downloadClient, downloadJSON) {
+	constructor(name, date, description, downloadClient, downloadJSON, type) {
 		this.name = name;
 		this.releaseTime = date;
 		this.description = description;
 		this.downloadClient = downloadClient;
 		this.downloadJSON = downloadJSON;
 
-		if (/(\d{1,2}w\d{1,2}[a-z])|(preview)|(test)|(experimental snapshot)/i.test(name)) {
-			this.type = 'snapshot';
+		if (type !== 'release') {
+			this.snapshotType = type;
+		} else if (/(\d{1,2}w\d{1,2}[a-z])|(preview)|(test)|(experimental snapshot)/i.test(name)) {
+			this.snapshotType = 'snapshot';
 		} else if (/(1\.\d{1,2}.\d{1,2}-pre)|(1\.\d{1,2}(\.\d{1,2})? pre-?release)/i.test(name)) {
-			this.type = 'pre-release';
+			this.snapshotType = 'pre-release';
 		} else if (/(1\.\d{1,2}.\d{1,2}-rc)|(RC\d)|(1\.\d{1,2}(\.\d{1,2})? release[- ]candidate)/i.test(name)) {
-			this.type = 'candidate';
+			this.snapshotType = 'candidate';
 		} else {
-			this.type = 'release';
+			this.snapshotType = 'release';
 		}
 	}
 
@@ -189,6 +191,6 @@ export class Snapshot {
 	 * @returns {Snapshot}
 	 */
 	static getFromJSON(json) {
-		return new Snapshot(json.name, new Date(json.releaseTime * 1000), json.description, json.downloadClient, json.downloadJSON);
+		return new Snapshot(json.name, new Date(json.releaseTime * 1000), json.description, json.downloadClient, json.downloadJSON, json.snapshotType);
 	}
 }
