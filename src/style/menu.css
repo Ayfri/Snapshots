@@ -114,7 +114,8 @@
 		padding: 10px;
 	}
 
-	.dropdown, .dropdown-content a {
+	.dropdown,
+	.dropdown-content a {
 		font-size: 1.4em;
 	}
 }

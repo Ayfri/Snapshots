@@ -36,5 +36,5 @@ but it is a good compromise, font may be a bit tiny.
 
 ## Contributors
 
-- [Ayfri](https://github.com/Ayfri)
-- [Samydj0](https://github.com/Samydj0)
+-   [Ayfri](https://github.com/Ayfri)
+-   [Samydj0](https://github.com/Samydj0)
