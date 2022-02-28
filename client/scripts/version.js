@@ -1,6 +1,6 @@
 import {MINECRAFT_WIKI_LINK} from './constants.js';
 import {fixGridCount} from './CSSFixes.js';
-import images from '../resources/images.json' assert {type: 'json'};
+import images from '/resources/images.json' assert {type: 'json'};
 import {generateSnapshotCard, Snapshot} from './snapshot.js';
 
 function generateVersionBody(versionPage, version) {
