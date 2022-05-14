@@ -1,8 +1,11 @@
 import {menuList, names} from './constants.js';
-import {generateVersionPage, json, Version} from './index.js';
+import {generateVersionPage, Version} from './version.js';
 
 export function createMenu() {
 	const navbar = document.querySelector('.navbar');
+	const jsonString = sessionStorage.getItem('json');
+	if (!jsonString) return;
+	const json = JSON.parse(jsonString);
 
 	menuList.forEach((dropdown, index) => {
 		const dropdownMenu = document.createElement('div');

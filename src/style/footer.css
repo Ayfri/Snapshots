@@ -1,17 +1,17 @@
 :root {
-	--footer-height: 40px;
+	--footer-height: 25px;
 	--icon-size: 35px;
 }
 
 .footer {
 	background-color: #292c2f;
+	bottom: 0;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 	box-sizing: border-box;
 	font: normal 16px sans-serif;
-	position: relative;
 	left: 0;
-	bottom: 0;
-	padding: var(--footer-height) 50px;
+	padding: var(--footer-height) 40px;
+	position: sticky;
 	text-align: left;
 	width: 100%;
 }
@@ -23,26 +23,26 @@
 }
 
 .footer p.footer-links {
+	color: #ffffff;
 	font-size: 18px;
 	font-weight: bold;
-	color: #ffffff;
 	margin: 0 0 10px;
 	padding: 0;
 }
 
 .footer p.footer-links a {
+	color: inherit;
 	display: inline-block;
 	line-height: 1.8;
 	text-decoration: none;
-	color: inherit;
 }
 
 .footer .footer-links a:before {
+	color: #ffffff;
 	content: '·';
+	display: inline-block;
 	font-size: 20px;
 	left: 0;
-	color: #fff;
-	display: inline-block;
 	padding-right: 5px;
 }
 
@@ -57,16 +57,16 @@
 }
 
 .footer .footer-right a {
-	display: inline-block;
-	width: var(--icon-size);
-	height: var(--icon-size);
 	background-color: #33383b;
 	border-radius: 2px;
-	font-size: 20px;
 	color: #ffffff;
-	text-align: center;
+	display: inline-block;
+	font-size: 20px;
+	height: var(--icon-size);
 	line-height: var(--icon-size);
 	margin-left: 3px;
+	text-align: center;
+	width: var(--icon-size);
 }
 
 .footer .footer-right a:hover {
@@ -96,28 +96,19 @@
 @media (orientation: portrait) {
 	:root {
 		--footer-height: 40px;
-		--icon-size: 60px;
-	}
-
-	.footer {
-		position: fixed;
-		bottom: 0;
+		--icon-size: 50px;
 	}
 
 	.footer .footer-left p {
-		font-size: max(1.2em, 100vw / 50);
+		font-size: max(1.1em, 100vw / 70);
 	}
 
 	.footer .footer-left p.footer-links {
-		font-size: max(1.5em, 100vw / 40);
+		font-size: max(1.4em, 100vw / 60);
 	}
 
 	.footer .footer-right a i {
-		padding-top: 0.5em;
-		font-size: 30px;
-	}
-
-	.page {
-		margin-bottom: calc(var(--footer-height) * 3.5);
+		font-size: 1.4rem;
+		padding-top: 0.2em;
 	}
 }

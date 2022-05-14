@@ -3,18 +3,18 @@
 	background-color: var(--nav-color);
 	border-radius: var(--dropdown-border-radius);
 	display: flex;
-	justify-content: space-evenly;
 	height: 50px;
+	justify-content: space-evenly;
+	margin: 4px;
 	overflow: hidden;
 	padding: 4px;
-	margin: 4px;
 	width: calc(98vw - 20px);
 }
 
 .navbar a {
 	color: white;
-	text-align: center;
 	padding: 10px 12px;
+	text-align: center;
 	text-decoration: none;
 }
 
@@ -24,14 +24,14 @@
 }
 
 .dropdown .dropdown-button {
-	font-size: 16px;
-	border: none;
-	color: black;
-	padding: 10px calc(2.5vw);
 	background-color: var(--button-background);
+	border: none;
 	border-radius: var(--dropdown-border-radius);
+	color: black;
 	font-family: inherit;
+	font-size: 16px;
 	margin: 0;
+	padding: 10px 2vw;
 	user-select: none;
 	white-space: pre-line;
 }
@@ -46,26 +46,26 @@
 }
 
 .dropdown-content {
-	display: none;
-	position: absolute;
 	background-color: #f9f9f9;
-	min-width: 80px;
-	box-shadow: 0 var(--dropdown-border-radius) 16px 0 rgba(0, 0, 0, 0.2);
-	z-index: 1;
 	border-radius: 0 0 var(--dropdown-border-radius) var(--dropdown-border-radius);
+	box-shadow: 0 var(--dropdown-border-radius) 16px 0 rgba(0, 0, 0, 0.2);
+	display: none;
+	min-width: 80px;
+	position: absolute;
+	z-index: 1;
 }
 
 .dropdown-content a {
-	float: none;
 	color: black;
-	padding: 10px 12px;
-	text-decoration: none;
 	display: block;
+	float: none;
+	padding: 10px 12px;
 	text-align: left;
+	text-decoration: none;
 }
 
 .dropdown-content a:hover {
-	background-color: #ddd;
+	background-color: #dddddd;
 }
 
 .dropdown-content a:last-child {
@@ -81,7 +81,7 @@
 		display: flex;
 		flex-direction: column;
 		height: 100%;
-		width: 98%;
+		width: calc(100% - 20px);
 	}
 
 	.navbar a {
@@ -89,25 +89,25 @@
 	}
 
 	.dropdown {
+		align-items: center;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		justify-content: center;
 		width: 100%;
 	}
 
 	.dropdown .dropdown-button {
+		font-size: 1.3em;
+		padding: 8px;
 		width: 100%;
-		padding: 10px;
-		font-size: 1.4em;
 	}
 
 	.dropdown-content {
-		width: 100%;
-		left: 0;
-		top: 100%;
-		position: relative;
 		border-radius: 0 0 var(--dropdown-border-radius) var(--dropdown-border-radius);
+		left: 0;
+		position: relative;
+		top: 100%;
+		width: 100%;
 	}
 
 	.dropdown-content a {
@@ -115,6 +115,6 @@
 	}
 
 	.dropdown, .dropdown-content a {
-		font-size: 1.4em;
+		font-size: 1.25em;
 	}
 }

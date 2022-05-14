@@ -6,34 +6,35 @@
 @import url('menu.css');
 
 :root {
-	--background-color: #a0a0a0;
-	--brighten-color: #eeeeee;
 	--button-background: #dddddd;
 	--dropdown-border-radius: 8px;
-	--nav-color: #212f53;
 	--page-border-radius: 20px;
+	--background-color: #a0a0a0;
+	--brighten-color: #eeeeee;
+	--nav-color: #212f53;
 	--shadow-color: #777777;
 }
 
 body {
+	background-color: var(--background-color);
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	margin: 0;
+	overflow-x: hidden;
 }
 
 .page {
+	align-items: center;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	background-color: var(--background-color);
 }
 
 .home {
+	align-items: center;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	height: 80vh;
 	padding: 0 10vw;
+	height: 85vh;
 }
 
 .image-title {
@@ -47,12 +48,13 @@ body {
 	box-shadow: 0 0 10px var(--shadow-color);
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 3rem;
 	padding: 1em;
 }
 
 .tutorial h2 {
-	margin: 0.5em;
 	font-size: 1.8em;
+	margin: 0.5em;
 }
 
 .tutorial ol {
@@ -60,18 +62,18 @@ body {
 }
 
 .tutorial li {
-	margin-bottom: 0.6em;
 	line-height: 1.7em;
+	margin-bottom: 0.6em;
 }
 
 .tutorial code,
 .tutorial kbd {
-	font-family: monospace;
-	color: #292c2f;
 	background-color: var(--brighten-color);
 	border: 1px solid #b4b4b4;
-	padding: 0.1em;
 	border-radius: 5px;
+	color: #292c2f;
+	font-family: monospace;
+	padding: 0.1em;
 	white-space: nowrap;
 }
 
@@ -90,6 +92,6 @@ body {
 }
 
 .logo img {
-	width: 40px;
 	height: 40px;
+	width: 40px;
 }

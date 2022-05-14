@@ -1,6 +1,6 @@
 import {MINECRAFT_WIKI_LINK} from './constants.js';
 import {fixGridCount} from './CSSFixes.js';
-import images from '../resources/images.json' assert {type: 'json'};
+import images from './images.js';
 import {generateSnapshotCard, Snapshot} from './snapshot.js';
 
 function generateVersionBody(versionPage, version) {
@@ -54,7 +54,8 @@ function generateVersionBody(versionPage, version) {
  * @param {(event: Event) => void} onChange
  * @param {boolean} checked
  */
-export function createCheckBox(div, name, onChange = () => {}, checked = true) {
+export function createCheckBox(div, name, onChange = () => {
+}, checked = true) {
 	const checkBox = document.createElement('input');
 	checkBox.type = 'checkbox';
 	checkBox.className = 'version-checkbox';
@@ -154,7 +155,7 @@ export class Version extends Snapshot {
 	 * @param {Snapshot[]} snapshots
 	 */
 	constructor(name, date, description, url, imageUrl, importantDescription, snapshots = []) {
-		super(name, date, description, '', '');
+		super(name, date, description, '', '', '');
 		this.imageUrl = imageUrl;
 		this.importantDescription = importantDescription;
 		this.url = url;
@@ -162,6 +163,7 @@ export class Version extends Snapshot {
 	}
 
 	/**
+	 * @override
 	 * @param {Version} json
 	 * @returns {Version}
 	 */
@@ -170,12 +172,12 @@ export class Version extends Snapshot {
 
 		const descriptionElement = document.createElement('p');
 		descriptionElement.innerHTML = description;
-		const text = descriptionElement.innerText.replace(/\.?\[\d]\.? /g, '. ');
+		const text = descriptionElement.innerText.replace(/\.?(\[\d])+\.?/g, '. ');
 		let importantDescription = `${text
 			.split(/\. [A-Z]/)
 			.slice(0, 2)
 			.join('\n')}.`;
-		if (importantDescription.length > 100) importantDescription = `${text.replace(/<sup><a>.*?<\/a><\/sup>/g, '').split(/\. [A-Z]/)[0]}.`;
+		if (importantDescription.length > 80) importantDescription = `${text.replace(/<sup.*?><a.*?>.*?<\/a><\/sup>/g, '').split(/\. [A-Z]/)[0]}.`;
 
 		const imageUrl = Object.entries(images).find(([key, value], _) => json.name.toLowerCase().endsWith(key))[1];
 		const snapshots = (json.snapshots ?? []).map(Snapshot.getFromJSON).filter(snapshot => !snapshot.name.toLowerCase().includes('server'));
