@@ -8,16 +8,16 @@ import (
 )
 
 func main() {
-	css := http.FileServer(http.Dir("./client/style"))
+	css := http.FileServer(http.Dir("../client/style"))
 	http.Handle("/style/", http.StripPrefix("/style/", css))
 
-	js := http.FileServer(http.Dir("./client/scripts"))
+	js := http.FileServer(http.Dir("../client/scripts"))
 	http.Handle("/js/", http.StripPrefix("/js/", js))
 
-	resources := http.FileServer(http.Dir("./client/resources"))
+	resources := http.FileServer(http.Dir("../client/resources"))
 	http.Handle("/resources/", http.StripPrefix("/resources/", resources))
 
-	tmpl, err := template.ParseGlob("./client/pages/*.html")
+	tmpl, err := template.ParseGlob("../client/pages/*.html")
 	if err != nil {
 		log.Fatal(err)
 	}
