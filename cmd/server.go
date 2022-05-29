@@ -11,8 +11,9 @@ import (
 )
 
 var (
-	contentDir = flag.String("content", "content", "content directory")
+	contentDir = flag.String("content", "../content", "content directory")
 	port       = flag.Int("port", 8080, "port to listen on")
+	verbose    = flag.Bool("verbose", false, "verbose logging")
 )
 
 func usage() {
@@ -35,7 +36,10 @@ func main() {
 	httpAddress := ":" + strconv.Itoa(*port)
 
 	handler := NewHandler(*contentDir)
-	log.Printf("Listening on port %d", *port)
+	if *verbose {
+		log.Printf("Listening on %s", httpAddress)
+		handler = loggingHandler(handler)
+	}
 	log.Fatal(http.ListenAndServe(httpAddress, handler))
 }
 
@@ -55,8 +59,16 @@ func NewHandler(contentDir string) http.Handler {
 
 func newSite(mux *http.ServeMux, contentFs fs.FS) *web.Site {
 	site := web.NewSite(contentFs)
+	site.SetVerbose(*verbose)
 
 	mux.Handle("/", site)
 
 	return site
+}
+
+func loggingHandler(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("%s %s %s", r.RemoteAddr, r.Method, r.URL.RequestURI())
+		h.ServeHTTP(w, r)
+	})
 }
