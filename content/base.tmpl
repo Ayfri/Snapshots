@@ -5,7 +5,13 @@
         <title>Title</title>
     </head>
     <body>
-        <p>{{.request.URL}}</p>
+        {{$data := cache "data"}}
+        <p>{{.request.URL.Path}}</p>
+        <p>
+            {{- with index $data 0}}
+                {{- .Name -}}
+            {{end -}}
+        </p>
         <p>Hello world !</p>
     </body>
 </html>

@@ -1,6 +1,7 @@
 package web
 
 import (
+	"VersionCraft2/internal/api"
 	"errors"
 	"fmt"
 	"github.com/patrickmn/go-cache"
@@ -8,6 +9,7 @@ import (
 	"io/fs"
 	"net/http"
 	"path"
+	"runtime/debug"
 	"strings"
 	"time"
 )
@@ -25,11 +27,16 @@ type Site struct {
 func NewSite(fs fs.FS) *Site {
 	const CacheDuration = 10 * time.Minute
 	const CleanupInterval = 15 * time.Minute
+
 	return &Site{
 		cache:      cache.New(CacheDuration, CleanupInterval),
 		fs:         fs,
 		fileServer: http.FileServer(http.FS(fs)),
 	}
+}
+
+func (s *Site) CacheSiteData(data api.Data) {
+	s.cache.Set("data", data, 12*time.Hour)
 }
 
 func (s *Site) SetVerbose(verbose bool) {
@@ -68,6 +75,11 @@ func (s *Site) ServeError(w http.ResponseWriter, r *http.Request, err error) {
 func (s *Site) ServeErrorStatus(w http.ResponseWriter, _ *http.Request, err error, status int) {
 	w.WriteHeader(status)
 	w.Write([]byte(err.Error()))
+
+	if s.verbose {
+		w.Write([]byte("\n"))
+		w.Write(debug.Stack())
+	}
 }
 
 func (s *Site) ServePage(w http.ResponseWriter, r *http.Request, page Page) {

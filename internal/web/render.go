@@ -24,10 +24,16 @@ func (s *Site) renderHTML(p Page, tmpl string, r *http.Request) ([]byte, error) 
 	}
 
 	t := template.New(BaseTemplate).Funcs(template.FuncMap{
-		"add":      func(a, b int) int { return a + b },
-		"sub":      func(a, b int) int { return a - b },
-		"mul":      func(a, b int) int { return a * b },
-		"div":      func(a, b int) int { return a / b },
+		"add": func(a, b int) int { return a + b },
+		"sub": func(a, b int) int { return a - b },
+		"mul": func(a, b int) int { return a * b },
+		"div": func(a, b int) int { return a / b },
+		"cache": func(name string) interface{} {
+			if value, exists := s.cache.Get(name); exists {
+				return value
+			}
+			return nil
+		},
 		"raw":      raw,
 		"toString": toString,
 	})

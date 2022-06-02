@@ -10,6 +10,8 @@ func toString(v any) string {
 	switch v := v.(type) {
 	case string:
 		return v
+	case []byte:
+		return string(v)
 	case template.HTML:
 		return string(v)
 	case nil:

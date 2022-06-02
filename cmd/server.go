@@ -1,6 +1,8 @@
 package main
 
 import (
+	"VersionCraft2/internal"
+	"VersionCraft2/internal/api"
 	"VersionCraft2/internal/web"
 	"flag"
 	"io/fs"
@@ -54,6 +56,13 @@ func NewHandler(contentDir string) http.Handler {
 	}
 
 	site := newSite(siteMux, contentFs)
+	data, err := api.FetchData()
+	if err != nil {
+		internal.Fatal(err)
+	}
+
+	site.CacheSiteData(data)
+
 	return site
 }
 
