@@ -3,16 +3,19 @@ package web
 import (
 	"errors"
 	"fmt"
+	"github.com/patrickmn/go-cache"
 	"html/template"
 	"io/fs"
 	"net/http"
 	"path"
 	"strings"
+	"time"
 )
 
 const BaseTemplate = "base.tmpl"
 
 type Site struct {
+	cache      *cache.Cache
 	fs         fs.FS
 	fileServer http.Handler
 	funcs      template.FuncMap
@@ -20,7 +23,10 @@ type Site struct {
 }
 
 func NewSite(fs fs.FS) *Site {
+	const CacheDuration = 10 * time.Minute
+	const CleanupInterval = 15 * time.Minute
 	return &Site{
+		cache:      cache.New(CacheDuration, CleanupInterval),
 		fs:         fs,
 		fileServer: http.FileServer(http.FS(fs)),
 	}
@@ -59,12 +65,17 @@ func (s *Site) ServeError(w http.ResponseWriter, r *http.Request, err error) {
 	s.ServeErrorStatus(w, r, err, http.StatusInternalServerError)
 }
 
-func (s *Site) ServeErrorStatus(w http.ResponseWriter, r *http.Request, err error, status int) {
+func (s *Site) ServeErrorStatus(w http.ResponseWriter, _ *http.Request, err error, status int) {
 	w.WriteHeader(status)
 	w.Write([]byte(err.Error()))
 }
 
 func (s *Site) ServePage(w http.ResponseWriter, r *http.Request, page Page) {
+	if page, found := s.cache.Get(r.URL.Path); found {
+		w.Write(page.([]byte))
+		return
+	}
+
 	html, err := s.renderHTML(page, BaseTemplate, r)
 	if err != nil {
 		s.ServeErrorStatus(w, r, fmt.Errorf("template execution: %v", err), http.StatusInternalServerError)
@@ -72,6 +83,11 @@ func (s *Site) ServePage(w http.ResponseWriter, r *http.Request, page Page) {
 	}
 
 	w.Write(html)
+	if s.verbose {
+		s.cache.Set(r.URL.Path, html, 5*time.Second)
+	} else {
+		s.cache.SetDefault(r.URL.Path, html)
+	}
 }
 
 func (s *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {

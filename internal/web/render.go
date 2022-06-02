@@ -2,7 +2,6 @@ package web
 
 import (
 	"bytes"
-	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -17,8 +16,7 @@ func (s *Site) renderHTML(p Page, tmpl string, r *http.Request) ([]byte, error) 
 	if !ok || url == "" {
 		p2["URL"] = r.URL.Path
 	}
-
-	fmt.Println(p2["URL"])
+	p2["request"] = r
 
 	base, err := s.readFile(".", tmpl)
 	if err != nil {
@@ -30,7 +28,6 @@ func (s *Site) renderHTML(p Page, tmpl string, r *http.Request) ([]byte, error) 
 		"sub":      func(a, b int) int { return a - b },
 		"mul":      func(a, b int) int { return a * b },
 		"div":      func(a, b int) int { return a / b },
-		"request":  func() *http.Request { return r },
 		"raw":      raw,
 		"toString": toString,
 	})
@@ -42,7 +39,6 @@ func (s *Site) renderHTML(p Page, tmpl string, r *http.Request) ([]byte, error) 
 
 	var buf bytes.Buffer
 	if err := t.Execute(&buf, p2); err != nil {
-		fmt.Println(err)
 		return nil, err
 	}
 
