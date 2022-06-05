@@ -24,3 +24,22 @@ func FetchData() (Data, error) {
 
 	return data, nil
 }
+
+func (d *Data) GetVersion(name string) *versions.Version {
+	for _, v := range *d {
+		if v.Name == name {
+			return &v
+		}
+	}
+	return nil
+}
+
+func (d *Data) GetLatestVersion() *versions.Version {
+	var latest versions.Version
+	for _, v := range *d {
+		if v.ReleaseDate.After(latest.ReleaseDate) {
+			latest = v
+		}
+	}
+	return &latest
+}

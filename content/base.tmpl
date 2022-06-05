@@ -2,16 +2,19 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="/images/logo-dark_64.png">
+        <script crossorigin="anonymous" src="https://kit.fontawesome.com/74fed0e2b5.js"></script>
+        <title>{{.title}}</title>
     </head>
     <body>
-        {{$data := cache "data"}}
-        <p>{{.request.URL.Path}}</p>
-        <p>
-            {{- with index $data 0}}
-                {{- .Name -}}
-            {{end -}}
-        </p>
-        <p>Hello world !</p>
+        {{template "navbar" .}}
+
+        {{block "layout" .}}
+            <p>{{.request.URL.Path}}</p>
+            <p>Hello world !</p>
+        {{end}}
+
+        {{template "footer" .}}
     </body>
 </html>

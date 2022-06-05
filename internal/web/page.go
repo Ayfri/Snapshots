@@ -2,6 +2,7 @@ package web
 
 import (
 	"io/fs"
+	"strings"
 )
 
 type Page map[string]any
@@ -11,6 +12,10 @@ func (s *Site) openPage(file string) (*Page, error) {
 	var err error
 	if file == "." {
 		file = BaseTemplate
+	}
+
+	if !strings.HasSuffix(file, ".tmpl") {
+		file += ".tmpl"
 	}
 
 	stat, err := fs.Stat(s.fs, file)

@@ -1,7 +1,7 @@
 package web
 
 import (
-	"VersionCraft2/internal/api"
+	"VersionCraft2/internal"
 	"errors"
 	"fmt"
 	"github.com/patrickmn/go-cache"
@@ -9,7 +9,6 @@ import (
 	"io/fs"
 	"net/http"
 	"path"
-	"runtime/debug"
 	"strings"
 	"time"
 )
@@ -33,10 +32,6 @@ func NewSite(fs fs.FS) *Site {
 		fs:         fs,
 		fileServer: http.FileServer(http.FS(fs)),
 	}
-}
-
-func (s *Site) CacheSiteData(data api.Data) {
-	s.cache.Set("data", data, 12*time.Hour)
 }
 
 func (s *Site) SetVerbose(verbose bool) {
@@ -72,26 +67,37 @@ func (s *Site) ServeError(w http.ResponseWriter, r *http.Request, err error) {
 	s.ServeErrorStatus(w, r, err, http.StatusInternalServerError)
 }
 
-func (s *Site) ServeErrorStatus(w http.ResponseWriter, _ *http.Request, err error, status int) {
-	w.WriteHeader(status)
-	w.Write([]byte(err.Error()))
-
+func (s *Site) ServeErrorStatus(w http.ResponseWriter, r *http.Request, err error, status int) {
 	if s.verbose {
-		w.Write([]byte("\n"))
-		w.Write(debug.Stack())
+		internal.LogError(err)
 	}
+
+	p := Page{
+		"URL":    r.URL.Path,
+		"layout": "error",
+		"status": status,
+		"error":  err.Error(),
+	}
+
+	s.ServePage(w, r, p)
 }
 
 func (s *Site) ServePage(w http.ResponseWriter, r *http.Request, page Page) {
-	if page, found := s.cache.Get(r.URL.Path); found {
-		w.Write(page.([]byte))
-		return
+	if r.Method == "GET" {
+		if page, found := s.cache.Get(r.URL.Path); found {
+			w.Write(page.([]byte))
+			return
+		}
 	}
 
 	html, err := s.renderHTML(page, BaseTemplate, r)
 	if err != nil {
 		s.ServeErrorStatus(w, r, fmt.Errorf("template execution: %v", err), http.StatusInternalServerError)
 		return
+	}
+
+	if code, ok := page["status"].(int); ok {
+		w.WriteHeader(code)
 	}
 
 	w.Write(html)
@@ -111,7 +117,7 @@ func (s *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	info, err := fs.Stat(s.fs, realPath)
+	_, err := fs.Stat(s.fs, realPath)
 	if err != nil {
 		status := http.StatusInternalServerError
 		if errors.Is(err, fs.ErrNotExist) {
@@ -122,32 +128,5 @@ func (s *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if info != nil && info.IsDir() {
-		s.serveDirectory(w, r, realPath)
-		return
-	}
-
 	s.fileServer.ServeHTTP(w, r)
-}
-
-func (s *Site) serveDirectory(w http.ResponseWriter, r *http.Request, realPath string) {
-	list, err := fs.ReadDir(s.fs, realPath)
-	if err != nil {
-		s.ServeError(w, r, err)
-		return
-	}
-
-	var info []fs.FileInfo
-	for _, f := range list {
-		i, err := f.Info()
-		if err == nil {
-			info = append(info, i)
-		}
-	}
-
-	s.ServePage(w, r, Page{
-		"URL":   r.URL.Path,
-		"Files": realPath,
-		"dir":   info,
-	})
 }
