@@ -46,11 +46,18 @@ func newHandler(site *web.Site, content fs.FS) *handler {
 
 func (h *handler) getData() (Data, error) {
 	data, found := h.cache.Get("data")
+
 	if found {
 		return data.(Data), nil
-	}
+	} else {
+		data, err := FetchData()
+		if err != nil {
+			return nil, err
+		}
 
-	return nil, errors.New("data not found")
+		h.CacheSiteData(data)
+		return data, nil
+	}
 }
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -62,6 +69,7 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	data, err := h.getData()
 	if err != nil {
 		h.site.ServeError(w, r, err)
+		return
 	}
 
 	var version *versions.Version

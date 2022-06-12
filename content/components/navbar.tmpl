@@ -1,16 +1,29 @@
 {{define "navbar"}}
-    <nav class="navbar">
-        <a class="navbar-icon" href="/home">
-            <img src="/images/logo-dark_64.png" alt="logo">
-        </a>
-        <div class="nvbar-links">
-            <a href="/home">Home</a>
-            <button class="navbar-button">Versions</button>
-            <a href="/tutorial">Tutorial</a>
-        </div>
+    {{css "navbar.css"}}
+    {{js "navbar.js"}}
 
-        <a class="navbar-icon" href="https://github.com/Ayfri/VersionCraft">
-            <i class="fa fa-github"></i>
-        </a>
-    </nav>
+    <header class="header">
+        <nav class="navbar">
+            <a class="navbar-icon navbar-logo" href="/home">
+                <img src="/images/logo-dark_64.png" alt="logo">
+            </a>
+
+            <div class="navbar-menu hidden">
+                <div class="navbar-links">
+                    <a class="link" href="/home">Home</a>
+                    <button class="link">Versions</button>
+                    <a class="link" href="/tutorial">Tutorial</a>
+                </div>
+
+                <a class="navbar-icon" href="https://github.com/Ayfri/VersionCraft">
+                    <i class="fa fa-github"></i>
+                </a>
+            </div>
+
+            <label for="show-navbar" class="show-menu">
+                <i class="fa fa-bars"></i>
+            </label>
+            <input type="checkbox" id="show-navbar" role="button">
+        </nav>
+    </header>
 {{end}}

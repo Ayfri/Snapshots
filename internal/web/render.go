@@ -38,6 +38,14 @@ func (s *Site) renderHTML(p Page, tmpl string, r *http.Request) ([]byte, error) 
 			}
 			return nil
 		},
+		"css": func(link string) template.HTML {
+			html := fmt.Sprintf("<link rel=\"stylesheet\" href=\"/css/%s\">", link)
+			return template.HTML(html)
+		},
+		"js": func(link string) template.HTML {
+			html := fmt.Sprintf("<script defer src=\"/js/%s\"></script>", link)
+			return template.HTML(html)
+		},
 		"raw":      raw,
 		"toString": toString,
 	})

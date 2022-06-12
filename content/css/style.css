@@ -1,0 +1,56 @@
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700");
+
+:root {
+	--dark-bg-100: #0f0f0f;
+	--dark-bg-200: #151515;
+	--dark-bg-300: #1b1b1b;
+	--dark-bg-400: #212121;
+	--dark-bg-500: #262626;
+	--dark-bg-600: #2b2b2b;
+	--dark-bg-700: #303030;
+	--dark-bg-800: #353535;
+	--dark-bg-900: #3a3a3a;
+
+	--text-color-100: #ffffff;
+	--text-color-200: #ededed;
+	--text-color-300: #e0e0e0;
+	--text-color-400: #d6d6d6;
+	--text-color-500: #cccccc;
+
+	--link-color: var(--text-color-100);
+	--link-hover-color: var(--text-color-400);
+	--link-active-color: var(--text-color-200);
+}
+
+* {
+	box-sizing: border-box;
+	font-family: "Open Sans", sans-serif;
+}
+
+body, p {
+	margin: 0;
+}
+
+a, .link {
+	color: var(--link-color);
+	text-decoration: none;
+	transition: color 0.2s ease-in-out;
+}
+
+a:hover, .link:hover {
+	color: var(--link-hover-color);
+}
+
+a:active, .link:active {
+	color: var(--link-active-color);
+}
+
+button {
+	background: none;
+	border: none;
+	color: var(--link-color);
+	cursor: pointer;
+	font-size: inherit;
+	outline: none;
+	padding: 0;
+}
