@@ -1,2 +1,22 @@
 {{define "footer"}}
+    {{css "footer.css"}}
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/latest">Latest Version</a>
+            <a href="/random">Random Version</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/Ayfri/VersionCraft">Github</a>
+            <a href="mailto:pierre.ayfri@gmail.com">Contact</a>
+        </div>
+
+        <p class="credits footer-text">VersionCraft &copy; {{now.Year}}</p>
+
+        <p class="disclaimer footer-text">
+            VersionCraft is not affiliated with Mojang.<br>
+            All downloadable jars are provided by official Mojang servers.<br>
+            Content is never re-distributed.
+        </p>
+    </footer>
 {{end}}

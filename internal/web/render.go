@@ -7,6 +7,7 @@ import (
 	"io/fs"
 	"net/http"
 	"path"
+	"time"
 )
 
 func (s *Site) renderHTML(p Page, tmpl string, r *http.Request) ([]byte, error) {
@@ -45,6 +46,12 @@ func (s *Site) renderHTML(p Page, tmpl string, r *http.Request) ([]byte, error) 
 		"js": func(link string) template.HTML {
 			html := fmt.Sprintf("<script defer src=\"/js/%s\"></script>", link)
 			return template.HTML(html)
+		},
+		"formatDate": func(date time.Time, format string) string {
+			return date.Format(format)
+		},
+		"now": func() time.Time {
+			return time.Now()
 		},
 		"raw":      raw,
 		"toString": toString,
