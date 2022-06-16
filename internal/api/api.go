@@ -17,12 +17,12 @@ type handler struct {
 	site    *web.Site
 }
 
-func (h *handler) CacheSiteData(data Data) {
+func (h *handler) CacheSiteData(data versions.Versions) {
 	h.cache.Set("data", data, 12*time.Hour)
 }
 
 func RegisterHandlers(mux *http.ServeMux, site *web.Site, content fs.FS) {
-	data, err := FetchData()
+	data, err := versions.FetchVersions()
 	if err != nil {
 		internal.Fatal(err)
 	}
@@ -44,13 +44,13 @@ func newHandler(site *web.Site, content fs.FS) *handler {
 	}
 }
 
-func (h *handler) getData() (Data, error) {
+func (h *handler) getData() (versions.Versions, error) {
 	data, found := h.cache.Get("data")
 
 	if found {
-		return data.(Data), nil
+		return data.(versions.Versions), nil
 	} else {
-		data, err := FetchData()
+		data, err := versions.FetchVersions()
 		if err != nil {
 			return nil, err
 		}
@@ -62,13 +62,25 @@ func (h *handler) getData() (Data, error) {
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	name := r.URL.Path[len("/versions/"):]
+
 	if name == "" {
-		name = "latest"
+		name = "none"
 	}
 
 	data, err := h.getData()
 	if err != nil {
 		h.site.ServeError(w, r, err)
+		return
+	}
+
+	versionsPage := web.Page{
+		"layout":   "versions",
+		"title":    "Versions - VersionCraft",
+		"versions": data.SplitByMenu(),
+	}
+
+	if name == "none" {
+		h.site.ServePage(w, r, versionsPage)
 		return
 	}
 
@@ -80,17 +92,17 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if version == nil {
-		h.site.ServeError(w, r, errors.New("version not found"))
-	}
+		if name == "none" {
+			h.site.ServePage(w, r, versionsPage)
+			return
+		}
 
-	layout := "version"
-	if name == "latest" {
-		layout = "versions"
+		h.site.ServeError(w, r, errors.New("version not found"))
 	}
 
 	h.site.ServePage(w, r, web.Page{
 		"name":    version.Name,
-		"layout":  layout,
+		"layout":  "version",
 		"version": version,
 		"title":   version.Name + " - VersionCraft",
 	})

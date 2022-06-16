@@ -50,6 +50,7 @@ func (s *Site) renderHTML(p Page, tmpl string, r *http.Request) ([]byte, error) 
 		"formatDate": func(date time.Time, format string) string {
 			return date.Format(format)
 		},
+		"formatRaw": formatRaw,
 		"now": func() time.Time {
 			return time.Now()
 		},

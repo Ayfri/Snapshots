@@ -1,23 +1,22 @@
-package api
+package versions
 
 import (
-	"VersionCraft2/internal/versions"
 	"encoding/json"
 	"net/http"
 )
 
 const DataLink = "https://github.com/Ayfri/minecraft-wiki-scrapper/raw/master/out/versions.json"
 
-type Data []versions.Version
+type Versions []Version
 
-func FetchData() (Data, error) {
+func FetchVersions() (Versions, error) {
 	resp, err := http.Get(DataLink)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 
-	var data Data
+	var data Versions
 	if err := json.NewDecoder(resp.Body).Decode(&data); err != nil {
 		return nil, err
 	}
@@ -25,8 +24,8 @@ func FetchData() (Data, error) {
 	return data, nil
 }
 
-func (d *Data) GetVersion(name string) *versions.Version {
-	for _, v := range *d {
+func (v *Versions) GetVersion(name string) *Version {
+	for _, v := range *v {
 		if v.Name == name {
 			return &v
 		}
@@ -34,12 +33,16 @@ func (d *Data) GetVersion(name string) *versions.Version {
 	return nil
 }
 
-func (d *Data) GetLatestVersion() *versions.Version {
-	var latest versions.Version
-	for _, v := range *d {
+func (v *Versions) GetLatestVersion() *Version {
+	var latest Version
+	for _, v := range *v {
 		if v.ReleaseDate.After(latest.ReleaseDate) {
 			latest = v
 		}
 	}
 	return &latest
+}
+
+func (v *Versions) SplitByMenu() map[string]Versions {
+	return SplitVersionsByMenu(v)
 }

@@ -1,3 +1,31 @@
 {{define "layout"}}
+    <div class="versions-grid">
+        {{range $key, $value := .versions}}
+            <p class="versions-type-title">
+                {{$key}}
+            </p>
 
+            {{template "versions-type" $value}}
+        {{end}}
+    </div>
+{{end}}
+
+{{define "versions-type"}}
+    <div class="versions-type">
+        {{range .}}
+            {{template "version-cell" .}}
+        {{end}}
+    </div>
+{{end}}
+
+
+{{define "version-cell"}}
+    <div class="version">
+        <div class="version-name">
+            {{.Name}}
+        </div>
+        <div class="version-date">
+            {{formatDate .ReleaseDate "2006-01-02"}}
+        </div>
+    </div>
 {{end}}

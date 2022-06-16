@@ -25,3 +25,7 @@ func toString(v any) string {
 func raw(s interface{}) template.HTML {
 	return template.HTML(toString(s))
 }
+
+func formatRaw(s interface{}) template.HTML {
+	return template.HTML(fmt.Sprintf("%#v", s))
+}

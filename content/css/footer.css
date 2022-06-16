@@ -13,7 +13,6 @@ footer {
 	display: grid;
 	grid-template: "links credits disclaimer" 1fr / 1fr 1fr 1fr;
 	padding: .8rem 1.5rem;
-	position: fixed;
 	width: 100%;
 }
 

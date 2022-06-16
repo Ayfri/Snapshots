@@ -12,10 +12,12 @@
     <body>
         {{template "navbar" .}}
 
-        {{block "layout" .}}
-            <p>{{.request.URL.Path}}</p>
-            <p>Hello world !</p>
-        {{end}}
+        <main class="main-content">
+            {{block "layout" .}}
+                <p>{{.request.URL.Path}}</p>
+                <p>Hello world !</p>
+            {{end}}
+        </main>
 
         {{template "footer" .}}
     </body>
