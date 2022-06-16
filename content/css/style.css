@@ -1,4 +1,5 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700");
+@import "components.css";
 
 :root {
 	--dark-bg-100: #0f0f0f;
@@ -24,6 +25,9 @@
 	--link-color: var(--text-color-100);
 	--link-hover-color: var(--text-color-400);
 	--link-active-color: var(--text-color-200);
+
+	--main-bg: var(--dark-bg-600);
+	--main-color: var(--text-color-100);
 }
 
 * {
@@ -60,5 +64,7 @@ button {
 }
 
 main {
-	margin: 1rem 0;
+	padding: 1rem 0;
+	background: var(--main-bg);
+	color: var(--main-color);
 }

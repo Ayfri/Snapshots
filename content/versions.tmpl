@@ -1,17 +1,22 @@
 {{define "layout"}}
-    <div class="versions-grid">
-        {{range $key, $value := .versions}}
-            <p class="versions-type-title">
-                {{$key}}
-            </p>
+    {{css "versions.css"}}
 
-            {{template "versions-type" $value}}
+    <div class="versions">
+        {{$versionsMenu := .versions}}
+        {{$versionsOrder := .versionsOrder}}
+        {{range $name := $versionsOrder}}
+            {{$versions := index $versionsMenu $name}}
+            <h2 class="versions-type-title">
+                {{$name}}
+            </h2>
+
+            {{template "versions-type" $versions}}
         {{end}}
     </div>
 {{end}}
 
 {{define "versions-type"}}
-    <div class="versions-type">
+    <div class="versions-type rounded-big">
         {{range .}}
             {{template "version-cell" .}}
         {{end}}
@@ -20,12 +25,21 @@
 
 
 {{define "version-cell"}}
-    <div class="version">
-        <div class="version-name">
+    <div class="version-cell rounded-big">
+        <p class="version-name">
             {{.Name}}
-        </div>
-        <div class="version-date">
-            {{formatDate .ReleaseDate "2006-01-02"}}
+        </p>
+
+        <p class="version-sub-count">
+            4 snapshots
+        </p>
+
+        <div class="version-cell-bottom">
+            <p class="date version-date">
+                {{formatDate .ReleaseDate "02/01/2006"}}
+            </p>
+
+            {{template "btn-go-to" map "URL" .SiteUrl "Text" "Go to page"}}
         </div>
     </div>
 {{end}}

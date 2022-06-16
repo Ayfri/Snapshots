@@ -33,6 +33,14 @@ func (s *Site) renderHTML(p Page, tmpl string, r *http.Request) ([]byte, error) 
 		"sub": func(a, b int) int { return a - b },
 		"mul": func(a, b int) int { return a * b },
 		"div": func(a, b int) int { return a / b },
+		"str": func(str ...string) string {
+			var b bytes.Buffer
+			for _, s := range str {
+				b.WriteString(s)
+			}
+
+			return b.String()
+		},
 		"cache": func(name string) interface{} {
 			if value, exists := s.cache.Get(name); exists {
 				return value
@@ -49,6 +57,14 @@ func (s *Site) renderHTML(p Page, tmpl string, r *http.Request) ([]byte, error) 
 		},
 		"formatDate": func(date time.Time, format string) string {
 			return date.Format(format)
+		},
+		"map": func(data ...any) map[string]any {
+			m := make(map[string]any)
+			for i := 0; i < len(data); i += 2 {
+				m[data[i].(string)] = data[i+1]
+			}
+
+			return m
 		},
 		"formatRaw": formatRaw,
 		"now": func() time.Time {

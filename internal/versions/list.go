@@ -5,9 +5,7 @@ import (
 	"regexp"
 )
 
-type versionList map[string][]string
-
-var ListArrangement = versionList{
+var ListArrangement = map[string][]string{
 	"Pre-Alpha": {
 		"pre-Classic", "Classic", "Indev", "Infdev",
 	},
@@ -22,8 +20,10 @@ var ListArrangement = versionList{
 	},
 }
 
-func SplitVersionsByMenu(versions *Versions) map[string]Versions {
-	menus := make(map[string]Versions)
+type Menu map[string]Versions
+
+func SplitVersionsByMenu(versions *Versions) (menus Menu, order []string) {
+	menus = make(Menu)
 
 	for name, menu := range ListArrangement {
 		var menuVersions []Version
@@ -42,5 +42,10 @@ func SplitVersionsByMenu(versions *Versions) map[string]Versions {
 		menus[name] = menuVersions
 	}
 
-	return menus
+	order = make([]string, 0, len(ListArrangement))
+	for k := range ListArrangement {
+		order = append(order, k)
+	}
+
+	return
 }

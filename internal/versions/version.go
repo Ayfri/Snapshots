@@ -2,6 +2,8 @@ package versions
 
 import (
 	"encoding/json"
+	"regexp"
+	"strings"
 	"time"
 )
 
@@ -37,4 +39,15 @@ func (v Version) MarshalJSON() ([]byte, error) {
 		ReleaseDate: v.ReleaseDate.Unix(),
 		Description: v.Description,
 	})
+}
+
+func (v Version) SiteUrl() string {
+	name := v.Name
+	name = regexp.MustCompile("Java Edition (?P<link>.+?)").ReplaceAllString(name, "$1")
+	name = strings.ReplaceAll(name, " updates", "")
+
+	name = regexp.MustCompile("[\\s.]").ReplaceAllString(name, "-")
+	name = strings.ToLower(name)
+
+	return "/versions/" + name
 }

@@ -43,6 +43,6 @@ func (v *Versions) GetLatestVersion() *Version {
 	return &latest
 }
 
-func (v *Versions) SplitByMenu() map[string]Versions {
+func (v *Versions) SplitByMenu() (menu Menu, order []string) {
 	return SplitVersionsByMenu(v)
 }

@@ -1,0 +1,37 @@
+:root {
+	--version-type-bg: var(--dark-bg-300);
+	--version-width: 16rem;
+}
+
+.versions {
+	margin: 1rem min(5rem, 10vw);
+}
+
+.versions-type {
+	background-color: var(--version-type-bg);
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(var(--version-width), 1fr));
+	padding: 1rem;
+}
+
+.version-cell {
+	align-items: center;
+	/*TODO: Use versions background when made*/
+	background: var(--dark-bg-400);
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	justify-content: space-between;
+	max-width: 30rem;
+	padding: 1rem 1rem;
+	justify-self: center;
+	width: 100%;
+}
+
+.version-cell-bottom {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}

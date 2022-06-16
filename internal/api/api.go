@@ -73,10 +73,12 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	versionsMenu, order := data.SplitByMenu()
 	versionsPage := web.Page{
-		"layout":   "versions",
-		"title":    "Versions - VersionCraft",
-		"versions": data.SplitByMenu(),
+		"layout":        "versions",
+		"title":         "Versions - VersionCraft",
+		"versionsOrder": order,
+		"versions":      versionsMenu,
 	}
 
 	if name == "none" {

@@ -1,0 +1,42 @@
+.rounded-big {
+	border-radius: 1.5rem;
+}
+
+.rounded-medium {
+	border-radius: 1rem;
+}
+
+.btn {
+	--btn-bg: var(--dark-bg-900);
+	--btn-bg-active: var(--dark-bg-700);
+	--btn-bg-hover: var(--dark-bg-800);
+
+	background-color: var(--btn-bg);
+	border: none;
+	color: var(--text-color-100);
+	cursor: pointer;
+	outline: none;
+	padding: 0.5rem 1rem;
+	transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover {
+	background-color: var(--btn-bg-hover);
+}
+
+.btn:active {
+	background-color: var(--btn-bg-active);
+}
+
+.go-to-page {
+	--btn-bg: hsl(119, 54%, 44%);
+	--btn-bg-active: hsl(119, 54%, 50%);
+	--btn-bg-hover: hsl(119, 54%, 38%);
+	--link-active-color: var(--text-color-100);
+	--link-hover-color: var(--text-color-100);
+}
+
+.date {
+	color: var(--text-color-400);
+	font-style: italic;
+}
