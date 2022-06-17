@@ -3,6 +3,7 @@ package versions
 import (
 	"encoding/json"
 	"net/http"
+	"strings"
 )
 
 const DataLink = "https://github.com/Ayfri/minecraft-wiki-scrapper/raw/master/out/versions.json"
@@ -26,10 +27,11 @@ func FetchVersions() (Versions, error) {
 
 func (v *Versions) GetVersion(name string) *Version {
 	for _, v := range *v {
-		if v.Name == name {
+		if strings.Contains(v.SiteName(), strings.ToLower(name)) {
 			return &v
 		}
 	}
+
 	return nil
 }
 

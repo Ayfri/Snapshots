@@ -31,7 +31,41 @@
         </p>
 
         <p class="version-sub-count">
-            4 snapshots
+            {{$experimental := .GetSnapshotsCountByType "experimental"}}
+            {{$snapshots := .GetSnapshotsCountByType "snapshot"}}
+            {{$preRelease := .GetSnapshotsCountByType "pre-release"}}
+            {{$candidate := .GetSnapshotsCountByType "candidate"}}
+            {{$release := .GetSnapshotsCountByType "release"}}
+
+            {{if $experimental}}
+                <span class="version-sub-count-experimental">
+                    {{$experimental}} experimental<br>
+                </span>
+            {{end}}
+            {{if $snapshots}}
+                <span class="version-sub-count-snapshots">
+                    {{$snapshots}} snapshots<br>
+                </span>
+            {{end}}
+
+            {{if $preRelease}}
+                <span class="version-sub-count-pre-release">
+                    {{$preRelease}} pre-releases<br>
+                </span>
+            {{end}}
+
+            {{if $candidate}}
+                <span class="version-sub-count-candidate">
+                    {{$candidate}} candidate releases<br>
+                </span>
+            {{end}}
+
+            {{if $release}}
+                <span class="version-sub-count-release">
+                    {{$release}} releases
+                </span>
+            {{end}}
+
         </p>
 
         <div class="version-cell-bottom">
@@ -39,7 +73,7 @@
                 {{formatDate .ReleaseDate "02/01/2006"}}
             </p>
 
-            {{template "btn-go-to" map "URL" .SiteUrl "Text" "Go to page"}}
+            {{template "btn-go-to" map "URL" .SiteURL "Text" "Go to page"}}
         </div>
     </div>
 {{end}}

@@ -49,9 +49,9 @@ footer .disclaimer {
 	justify-self: end;
 }
 
-/* Mobile */
+/* Responsive */
 
-@media screen and (max-width: 700px) {
+@media only screen and (max-width: 700px) {
 	footer {
 		grid-template: "links" 1fr
 						"disclaimer" 1fr

@@ -1,0 +1,89 @@
+{{define "layout"}}
+    {{css "version.css"}}
+    {{$version := .version}}
+    <div class="version">
+        <div class="version-info">
+            <h1 class="version-name">
+                {{$version.Name}}
+            </h1>
+
+            <p class="version-description">
+                {{raw $version.Description}}
+            </p>
+        </div>
+
+        <div class="version-snapshots rounded-big">
+            <div class="snapshots-options rounded-big">
+                <div class="snapshots-filter">
+                    {{$experimental := $version.GetSnapshotsCountByType "experimental"}}
+                    {{$snapshots := $version.GetSnapshotsCountByType "snapshot"}}
+                    {{$preRelease := $version.GetSnapshotsCountByType "pre-release"}}
+                    {{$candidate := $version.GetSnapshotsCountByType "candidate"}}
+                    {{$release := $version.GetSnapshotsCountByType "release"}}
+
+                    <button class="snapshots-filter-button {{- if eq $experimental 0}} disabled {{else}} activated {{end}}">
+                        Experimental ({{$experimental}})
+                    </button>
+
+                    <button class="snapshots-filter-button {{- if eq $snapshots 0}} disabled {{else}} activated {{end}}">
+                        Snapshot ({{$snapshots}})
+                    </button>
+
+                    <button class="snapshots-filter-button {{- if eq $preRelease 0}} disabled {{else}} activated {{end}}">
+                        Pre-Release ({{$preRelease}})
+                    </button>
+
+                    <button class="snapshots-filter-button {{- if eq $candidate 0}} disabled {{else}} activated {{end}}">
+                        Release Candidate ({{$candidate}})
+                    </button>
+
+                    <button class="snapshots-filter-button {{- if eq $release 0}} disabled {{else}} activated {{end}}">
+                        Release ({{$release}})
+                    </button>
+                </div>
+                <div class="snapshots-sort">
+                    <label for="snapshots-filter-select">
+                        Sort By :
+                    </label>
+
+                    <div class="select">
+                        <select id="snapshots-filter-select">
+                            {{range .orders}}
+                                <option {{if .Selected}} selected {{end}} value="{{.Name}}">
+                                    {{.Name}}
+                                </option>
+                            {{end}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="snapshots-list-count">
+                Showing: 16
+            </h3>
+
+            <div class="snapshots-list">
+                {{range $version.Snapshots}}
+                    {{template "snapshot-cell" .}}
+                {{end}}
+            </div>
+        </div>
+    </div>
+{{end}}
+
+
+{{define "snapshot-cell"}}
+    {{- /*gotype: VersionCraft2/internal/snapshots.Snapshot*/ -}}
+    <div class="snapshot-cell rounded-big">
+        <h2 class="snapshot-name">
+            {{.Name}}
+        </h2>
+        <div class="snapshot-cell-bottom">
+            <p class="date snapshot-date">
+                {{formatDate .ReleaseDate "02/01/2006"}}
+            </p>
+
+            {{template "btn-go-to" map "URL" .SiteURL "Text" "Go to site"}}
+        </div>
+    </div>
+{{end}}

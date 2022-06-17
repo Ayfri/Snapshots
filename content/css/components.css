@@ -1,9 +1,19 @@
+:root {
+	--rounded-big: 1.2rem;
+	--rounded-medium: .8rem;
+	--rounded-small: .5rem;
+}
+
 .rounded-big {
-	border-radius: 1.5rem;
+	border-radius: var(--rounded-big);
 }
 
 .rounded-medium {
-	border-radius: 1rem;
+	border-radius: var(--rounded-medium);
+}
+
+.rounded-small {
+	border-radius: var(--rounded-small);
 }
 
 .btn {
@@ -16,7 +26,7 @@
 	color: var(--text-color-100);
 	cursor: pointer;
 	outline: none;
-	padding: 0.5rem 1rem;
+	padding: 0.5rem clamp(.8rem, 2vw, 2rem);
 	transition: background-color 0.2s ease-in-out;
 }
 

@@ -2,6 +2,7 @@ package api
 
 import (
 	"VersionCraft2/internal"
+	"VersionCraft2/internal/snapshots"
 	"VersionCraft2/internal/versions"
 	"VersionCraft2/internal/web"
 	"errors"
@@ -62,7 +63,6 @@ func (h *handler) getData() (versions.Versions, error) {
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	name := r.URL.Path[len("/versions/"):]
-
 	if name == "" {
 		name = "none"
 	}
@@ -103,8 +103,8 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	h.site.ServePage(w, r, web.Page{
-		"name":    version.Name,
 		"layout":  "version",
+		"orders":  snapshots.Orders,
 		"version": version,
 		"title":   version.Name + " - VersionCraft",
 	})

@@ -1,6 +1,6 @@
 :root {
-	--version-type-bg: var(--dark-bg-300);
-	--version-width: 16rem;
+	--versions-type-bg: var(--dark-bg-300);
+	--version-cell-width: 16rem;
 }
 
 .versions {
@@ -8,10 +8,10 @@
 }
 
 .versions-type {
-	background-color: var(--version-type-bg);
+	background-color: var(--versions-type-bg);
 	display: grid;
 	gap: 1rem;
-	grid-template-columns: repeat(auto-fit, minmax(var(--version-width), 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(var(--version-cell-width), 1fr));
 	padding: 1rem;
 }
 
@@ -21,7 +21,7 @@
 	background: var(--dark-bg-400);
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	gap: 1.2rem;
 	justify-content: space-between;
 	max-width: 30rem;
 	padding: 1rem 1rem;
@@ -34,4 +34,9 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
+}
+
+.version-sub-count {
+	text-transform: capitalize;
+	text-align: center;
 }
